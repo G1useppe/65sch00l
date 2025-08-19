@@ -1,0 +1,155 @@
+1. Find all sessions originating from the 192.168.1.0/24 subnet accessing external web servers on port 80.
+
+Query:
+ip.src == 192.168.1.0/24 && dst.port == 80 && !(ip.dst == 192.168.0.0/16 || ip.dst == 10.0.0.0/8 || ip.dst == 172.16.0.0/12)
+
+---
+
+2. Which country does the IP address that accessed any `.ru` domain belong to?
+
+Query:
+dns.host == *.ru
+
+---
+
+3. How many TLS version 1 sessions are there in total?
+
+Query:
+tls.version == TLSv1
+
+---
+
+4. Which university’s network does the IP address 192.168.1.10 communicate with most frequently? Use the SPI graph on the destination ASN to find out.
+
+Query:
+ip.src == 192.168.1.10
+
+---
+
+5. Find FTP sessions initiated by hosts within the 192.168.0.0/8 subnet. There are only two such sessions. For each, identify the destination IP address and the total number of packets transferred.
+
+Query:
+protocols == ftp && ip.src == 192.168.0.0/8
+
+---
+
+6. Find HTTP POST requests that resulted in a 500 Internal Server Error. How many such sessions are there?
+
+Query:
+http.method == POST && http.statuscode == 500
+
+---
+
+7. [Omitted]
+
+---
+
+8. Find TLS sessions where the JA3 fingerprint matches a known malware fingerprint. How many such sessions are there?
+
+Query:
+tls.ja3 == <known_malware_ja3_hash>
+
+---
+
+9. Using the Connections view, how many connection groups are there for connections originating from IP addresses located in the United Kingdom (GB)?
+
+(No direct query; use Connections view with filter: country.src == GB)
+
+---
+
+10. Find HTTP POST sessions with uploaded data larger than 1 MB. How many such sessions exist?
+
+Query:
+http.method == POST && databytes > 1048576
+
+---
+
+11. Find TLS sessions that used self-signed certificates (where the certificate issuer and subject are the same). How many such sessions exist?
+
+Query:
+tls.issuer == tls.subject
+
+---
+
+12. Identify SSH connections using non-standard ports (ports other than 22). How many such sessions are there?
+
+Query:
+protocols == ssh && (port.src != 22 || port.dst != 22)
+
+---
+
+13. Within the internal subnet 192.168.0.0/16, which are the top 3 IP addresses by total number of DNS queries made? How many queries did each make?
+
+Query:
+protocols == dns && ip.src == 192.168.0.0/16
+
+---
+
+14. Which versions of curl appear in the HTTP User-Agent strings in the traffic? List all unique versions found.
+
+Query:
+http.user-agent =~ /curl/i
+
+---
+
+15. Among HTTP requests containing the query parameter id, what is the most common URI path accessed?
+
+Query:
+http.uri == "*?id=*"
+
+---
+
+16. [Omitted]
+
+---
+
+17. Apart from Basic, what is the only other value seen for http.authtype in HTTP sessions? Identify the value.
+
+Query:
+http.authtype:*
+
+---
+
+18. How many DNS update sessions (opcode UPDATE) are present in the traffic? Additionally, provide a brief explanation (a 'word picture') of what the DNS UPDATE opcode means and when it is used.
+
+Query:
+dns.opcode == UPDATE
+
+---
+
+19. How many HTTP GET sessions have a response body identified as application/json?
+
+Query:
+http.method == GET && http.bodymagic == application/json
+
+---
+
+20. Find all FTP sessions where the username used for login is anonymous. How many such sessions exist?
+
+Query:
+protocols == ftp && user == anonymous
+
+---
+
+21. [Omitted]
+
+---
+
+22. Identify the three most common TLS cipher suites observed in the traffic. For each, provide an assessment of its security (e.g., strong, weak, deprecated).
+
+Query:
+tls.cipher:*
+
+---
+
+23. Identify which mobile phone manufacturers appear in the HTTP User-Agent strings. List all unique manufacturers found.
+
+Query:
+http.user-agent =~ /android|iphone|samsung|huawei|nokia/i
+
+---
+
+24. Find the session where an HTTP GET request returned JSON data with a status code of 302. Provide the details of this session.
+
+Query:
+http.method == GET && http.bodymagic == application/json && http.statuscode == 302
