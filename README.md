@@ -4,3 +4,5 @@
 
 
 https://www.malware-traffic-analysis.net/2020/04/24/2020-04-24-traffic-analysis-exercise.pcap.zip
+
+https://github.com/corelight/zeek-cheatsheets/blob/master/Corelight-Zeek-Cheatsheet-8.0.pdf
