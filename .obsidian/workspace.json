@@ -1,0 +1,215 @@
+{
+  "main": {
+    "id": "64cee237c9cc8a29",
+    "type": "split",
+    "children": [
+      {
+        "id": "28ee4ab0f33972fd",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "27557e747735fa75",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "65school/host/powershell/powershell_intro.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "powershell_intro"
+            }
+          }
+        ]
+      },
+      {
+        "id": "e6da6bd7f2865cee",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "63e6ea5e803917af",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "65school/host/hayabusa/hayabusa_intro.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "hayabusa_intro"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "30d7dc850dee83fa",
+    "type": "split",
+    "children": [
+      {
+        "id": "d6769fc8d7743112",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "242627b5137533d4",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "bbebab1934494eac",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "1cb866c7e2f9fc0f",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "83dd9d4e5c04f2d8",
+    "type": "split",
+    "children": [
+      {
+        "id": "bcb7d3575820c18b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f497fa55cc17eaa2",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Welcome.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Welcome"
+            }
+          },
+          {
+            "id": "a755fc1aae769fb2",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Welcome.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Welcome"
+            }
+          },
+          {
+            "id": "8e4a83c7d94b301c",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "2293891cc6ba24ac",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Welcome.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Welcome"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false,
+      "obsidian-git:Open Git source control": false
+    }
+  },
+  "active": "63e6ea5e803917af",
+  "lastOpenFiles": [
+    "65school/host/yara/yara_intro.md",
+    "65school/host/hayabusa/hayabusa_intro.md",
+    "65school/host/velociraptor/velociraptor_intro.md",
+    "65school/host/powershell/powershell_intro.md",
+    "65school/net/suricata_arkime/suricata_arkime_intro.md",
+    "65school/host/yara",
+    "65school/host/hayabusa",
+    "65school/host/velociraptor",
+    "65school/host/powershell",
+    "65school/NAPX.md",
+    "65school/net/suricata_arkime/suricata",
+    "Welcome.md",
+    "65school/net/suricata_arkime",
+    "65school/Untitled",
+    "65school/host",
+    "65school/st0ne_fish_v0.png",
+    "65school/new_repo_structure.txt",
+    "65school/net/xprint-seq-diagram-filter-high-alerts.py",
+    "65school/README.md"
+  ]
+}
