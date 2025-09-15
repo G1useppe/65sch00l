@@ -1,6 +1,3 @@
-[NAPX.md](https://github.com/user-attachments/files/22325319/NAPX.md)
-This is the splash page for the NAPX *vault*.
-
 To conduct this demonstration, please grab the PCAP file from [https://www.malware-traffic-analysis.net/2020/05/08/index.html]()
 
 To conduct a NAPX, please conduct the following steps:
@@ -12,18 +9,80 @@ touch capinfos_<yyyymmdd>.txt
 mkdir logs 
 mkdir ./logs/suricata ./logs/zeek
 ```
+
 In our demonstration case;
 
 ```
 mkdir demo_napx
 cd demo_napx
-touch capinfos_20200508.txt
 mkdir logs 
-mkdir ./logs/suricata ./logs/zeek
+cd logs
+mkdir suricata zeek
+#for st0ne_fish v0
+#sudo apt install pipx
+sudo pipx run suricata-update
 ```
 ### Metadata Review
 To grab the essential metadata from the PCAP, we can use the inbuilt Wireshark CLI program *capinfos*.
+
 ```
 capinfos -A ./demo.pcap > ./capinfos_20200508.txt
 cat ./capinfos_20200508.txt
 ```
+
+The output from *capinfos* is a powerful means of gaining an overview of the dataset.
+
+```
+File name:           ./2020-05-08-Trickbot-infection-in-AD-environment.pcap
+File type:           Wireshark/tcpdump/... - pcap
+File encapsulation:  Ethernet
+File timestamp precision:  microseconds (6)
+Packet size limit:   file hdr: 65535 bytes
+Number of packets:   51 k
+File size:           43 MB
+Data size:           42 MB
+Capture duration:    3098.787716 seconds
+First packet time:   2020-05-09 06:46:17.014345
+Last packet time:    2020-05-09 07:37:55.802061
+Data byte rate:      13 kBps
+Data bit rate:       110 kbps
+Average packet size: 829.54 bytes
+Average packet rate: 16 packets/s
+SHA256:              ad66158f88c4b7b652649463d58fbcb169b32a82d57c89a438b8c9cecc981cc3
+RIPEMD160:           52d9a4a2e343887e258234552f34168c254f899b
+SHA1:                6fad67da442f99a5c2febbab860d2c68128d27d3
+Strict time order:   True
+Number of interfaces in file: 1
+Interface #0 info:
+                     Encapsulation = Ethernet (1 - ether)
+                     Capture length = 65535
+                     Time precision = microseconds (6)
+                     Time ticks per second = 1000000
+                     Number of stat entries = 0
+                     Number of packets = 51370
+
+```
+
+### Suricata Offline Mode
+
+To begin rules based detection for the PCAP, run Suricata in offline mode. 
+
+```
+suricata -r demo.pcap -k none --runmode single -l ./logs/suricata/ -vvv -S /var/lib/suricata/rules/suricata.rules
+```
+
+The flags in the command ask Suricata to act in the following ways:
+- -r specifies offline mode
+- -k none asks Suricata to bypass checksums
+- -l specifies the directory in which Suricata writes the logs it is configured to write
+- -v(vv) specifies the degree of verbosity in the terminal
+- -S specifies the rule file (which was found by running suricata --dump-config)
+### Zeek Offline Mode
+
+```
+
+```
+
+### Sequence Diagram
+
+### Annotated Screenshots
