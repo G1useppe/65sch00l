@@ -19,6 +19,47 @@
 
 ---
 
+## Upgrading Commands
+
+One of the most important skills when hunting with PowerShell is learning how to **upgrade** basic commands into more powerful pipelines.
+
+We’ll use **process hunting** as our example.
+### Start simple
+
+See everything that’s running.
+
+`Get-Process`
+### Refine
+
+Only show the fields you care about.
+
+`Get-Process | Select-Object Name, Id, Path`
+
+### Filter
+
+Look only for a specific process, like PowerShell.
+
+`Get-Process | Where-Object { $_.Name -like "powershell*" }`
+
+### Sort / Limit
+
+Find the top 5 memory-hungry processes.
+
+`Get-Process | Sort-Object WorkingSet -Descending | Select-Object -First 5 Name, Id, WorkingSet`
+
+### Export
+
+Save results for later analysis.
+
+`Get-Process | Select-Object Name, Id, Path, CPU |   Export-Csv -Path .\process_list.csv -NoTypeInformation`
+
+Export as JSON (useful for scripts/automation):
+
+`Get-Process | Select-Object Name, Id, Path |   ConvertTo-Json | Out-File .\process_list.json`
+
+---
+
+
 # Hunting with PowerShell
 
 ## Basic Hunting
@@ -210,8 +251,9 @@ During your hunt, you want to check for suspicious files that may have been drop
 
 **Basic:**
 
-```cmd
-dir C:\Users\%USERNAME%\AppData /s /b /a:-d
+```powershell
+Get-ChildItem -Path "C:\Users\$env:USERNAME\AppData" -Recurse -File | Select-Object FullName
+
 ```
 
 **Upgraded:**  
@@ -231,24 +273,65 @@ Get-ChildItem -Path C:\Users\ -Recurse -Include *.exe,*.dll,*.bat,*.ps1 -ErrorAc
 
 ---
 
-## 🔄 Combining Commands
+## Installed Programs
+### Scenario
 
-- Use **`| Select-Object`** to narrow fields.
-    
-- Use **`| Where-Object`** to filter results.
-    
-- Example: Find only PowerShell processes and show their command lines:
-    
-    ```powershell
-    Get-WmiObject Win32_Process -Filter "Name='powershell.exe'" |
-      Select-Object ProcessId, CommandLine
-    ```
-    
+You want to confirm what software is installed on a host to look for potentially unwanted or malicious programs.
+
+### Answers
+
+**Basic:**
+
+`Get-WmiObject Win32_Product`
+
+**Upgraded (faster, cleaner):**
+
+`Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* |   Select-Object DisplayName, DisplayVersion, Publisher, InstallDate`
+
 
 ---
 
-## 🏁 Capstone
+## Event Logs
 
-- Apply everything learned (system info, accounts, processes, services, network, persistence, file hunts).
-    
-- Upgrade from **basic commands** to **refined hunting pipelines**.
+### Scenario
+
+You suspect suspicious logon activity and want to check the **Security** event logs for evidence.
+
+### Answers
+
+**Basic:**
+
+`Get-EventLog -LogName Security`
+
+**Upgraded (logon events only):**
+
+`Get-EventLog -LogName Security -InstanceId 4624 -Newest 10 |   Select-Object TimeGenerated, ReplacementStrings`
+
+**Upgraded (filter with Get-WinEvent):**
+
+`Get-WinEvent -LogName Security -FilterHashtable @{Id=4624} |   Select-Object TimeCreated, Id, Message -First 20`
+
+---
+
+## Execution Artefacts
+
+### Scenario
+
+You want to see what has been executed on the host to look for suspicious commands or programs.
+
+### Answers
+
+**Basic (Prefetch — requires admin):**
+
+`Get-ChildItem C:\Windows\Prefetch`
+
+**Upgraded (show file names + creation time):**
+
+`Get-ChildItem C:\Windows\Prefetch |   Select-Object Name, CreationTime, LastWriteTime`
+
+**Upgraded (ShimCache / AppCompatCache — from registry):**
+
+`Get-ItemProperty HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\AppCompatCache`
+
+---
+#powershell_activity1
