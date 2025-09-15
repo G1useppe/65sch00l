@@ -3,11 +3,14 @@ To conduct this demonstration, please grab the PCAP file from [https://www.malwa
 To conduct a NAPX, please conduct the following steps:
 ### Environment Setup
 ```
-mkdir <preferred working directory>
-cd <preferred working directory>
-touch capinfos_<yyyymmdd>.txt
+cd ~
+mkdir napx_demo
+cd napx_demo
 mkdir logs 
-mkdir ./logs/suricata ./logs/zeek
+cd logs
+mkdir suricata zeek
+cd ..
+cp -r ~/.seqdiag_rsrc .
 ```
 
 In our demonstration case;
@@ -62,7 +65,6 @@ Interface #0 info:
                      Number of packets = 51370
 
 ```
-
 ### Suricata Offline Mode
 
 To begin rules based detection for the PCAP, run Suricata in offline mode. 
@@ -74,15 +76,42 @@ suricata -r demo.pcap -k none --runmode single -l ./logs/suricata/ -vvv -S /var/
 The flags in the command ask Suricata to act in the following ways:
 - -r specifies offline mode
 - -k none asks Suricata to bypass checksums
+- --runmode single ensures Suricata uses only one thread - this is important for having chronologically ordered logs
 - -l specifies the directory in which Suricata writes the logs it is configured to write
 - -v(vv) specifies the degree of verbosity in the terminal
 - -S specifies the rule file (which was found by running suricata --dump-config)
-### Zeek Offline Mode
-
-```
-
-```
 
 ### Sequence Diagram
 
+With the Suricata logs produced, a sequence diagram can be produced.
+
+```
+cd ~/napx_demo/seqdiag
+cp -r ~/.seqdiag_rsrc/* .
+cp ~/napx_demo/logs/suricata/eve.json .
+python3 seqdiag.py | java -Djava.awt.headless=true -jar plantuml-mit-1.2024.6.jar -p -Tpng > seqdiag.png
+```
+
+### Zeek Offline Mode
+
+```
+cd ~/napx
+zeek -r demo.pcap Log::logdir=./logs/zeek Log::default_writer=JSON
+zeek -r /path/to/capture.pcap -e 'redef Log::default_logdir="./logs/zeek"; redef Log::default_writer=Log::WRITER_JSON;'
+
+```
+
+
+
+### Splunk Import
+
+To import the offline 
+
+```
+cd /opt/splunk/bin/
+sudo ./splunk add index suricata
+sudo ./splunk add oneshot ~/napx_demo/logs/suricata/eve.json -index suricata -sourcetype _json
+firefox http://127.0.0.1:8000
+#credentials st0ne_fish/st0nefish
+```
 ### Annotated Screenshots
