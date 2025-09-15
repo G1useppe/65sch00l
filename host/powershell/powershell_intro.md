@@ -31,22 +31,29 @@ Verb-Noun -Parameter Value (-Parameter additional)
 ### System Information
 Scenario:
 You've been asked to preform a hunt on a Windows Network.
-You ( Host Analyst) have been tasked with preforming a baseline of the network.
+You (Host Analyst) have been tasked with preforming a baseline of the network.
 This requires you to confirm all the host names and their versions of Windows.
 
-Rule:
-- PowerShell only
-
+Activity:
 What command could you run on the hosts on the network to retrieve this?
 
 ### User Accounts
 Scenario:
 It's five days into the hunt, someone reports a user preforming suspicious activity. You check the baseline and see that the user account was present during the baseline. This doesn't mean that the user account is clear.
 
-Rule: 
-- PowerShell only
-
+Activity: 
 How else could you check if the account is suspicious?
+- The account is a domain account.
+
+### Processes & Services
+Scenario:
+You see PowerShell.exe running on a host but are unsure if its normal for that process to be running.
+
+Activity:
+List all running processes.
+Check process metadata including paths and arguments
+List all the services on the machine
+
 
 # Combining commands
 
