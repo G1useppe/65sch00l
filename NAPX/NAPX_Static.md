@@ -23,7 +23,7 @@ wget -P ~/napx_demo/.rsrc https://raw.githubusercontent.com/G1useppe/65sch00l/ma
 wget -P ~/napx_demo/.rsrc https://raw.githubusercontent.com/G1useppe/65sch00l/main/NAPX/.rsrc/zeek_oneshot.sh
 
 ```
-### Metadata Review
+### Metadata Review 
 To grab the essential metadata from the PCAP, we can use the inbuilt Wireshark CLI program *capinfos*.
 
 ```
