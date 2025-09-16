@@ -118,4 +118,4 @@ firefox http://127.0.0.1:8000
 ```
 ### Annotated Screenshots
 
-Welcome to the analysis phase. It's now time to prove your mettle as a network analyst. Using Splunk to investigate the alerts and logs, investigate the alerts
+Welcome to the analysis phase. It's now time to prove your mettle as a network analyst. Using Splunk to investigate the alerts and logs, investigate the alerts and characterize the intrusion!
