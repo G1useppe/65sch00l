@@ -1,4 +1,4 @@
-To conduct this demonstration, please grab the PCAP file from [https://www.malware-traffic-analysis.net/2020/05/08/index.html]()
+To conduct this demonstration, please grab the PCAP file from [https://www.malware-traffic-analysis.net/2020/05/08/index.html](), however it can also be found on the st0ne_fish virtual disk at ~/Documents/.rsrc
 
 To conduct a NAPX, please conduct the following steps:
 ### Environment Setup
@@ -6,29 +6,22 @@ To conduct a NAPX, please conduct the following steps:
 cd ~
 mkdir napx_demo
 cd napx_demo
-mkdir logs 
+#unzip the pcap here and call it demo.pcap
+mkdir logs .rsrc
 cd logs
 mkdir suricata zeek
 cd ..
-cp -r ~/.seqdiag_rsrc .
-```
-
-In our demonstration case;
-
-```
-mkdir demo_napx
-cd demo_napx
-mkdir logs 
-cd logs
-mkdir suricata zeek
-#for st0ne_fish v0
-#sudo apt install pipx
-sudo pipx run suricata-update
+cp ~/Documents/.rsrc/* ./.rsrc
+sudo /opt/splunk/bin/splunk remove index zeek
+sudo /opt/splunk/bin/splunk remove index suricata
+sudo /opt/splunk/bin/splunk add index zeek
+sudo /opt/splunk/bin/splunk add index suricata
 ```
 ### Metadata Review
 To grab the essential metadata from the PCAP, we can use the inbuilt Wireshark CLI program *capinfos*.
 
 ```
+cd ~/napx_demo
 capinfos -A ./demo.pcap > ./capinfos_20200508.txt
 cat ./capinfos_20200508.txt
 ```
@@ -70,6 +63,7 @@ Interface #0 info:
 To begin rules based detection for the PCAP, run Suricata in offline mode. 
 
 ```
+cd ~/napx_demo/
 suricata -r demo.pcap -k none --runmode single -l ./logs/suricata/ -vvv -S /var/lib/suricata/rules/suricata.rules
 ```
 
@@ -86,32 +80,42 @@ The flags in the command ask Suricata to act in the following ways:
 With the Suricata logs produced, a sequence diagram can be produced.
 
 ```
-cd ~/napx_demo/seqdiag
-cp -r ~/.seqdiag_rsrc/* .
-cp ~/napx_demo/logs/suricata/eve.json .
-python3 seqdiag.py | java -Djava.awt.headless=true -jar plantuml-mit-1.2024.6.jar -p -Tpng > seqdiag.png
+cd ~/napx_demo/
+cp ~/napx_demo/logs/suricata/eve.json ./.rsrc/
+python3 ./.rsrc/seqdiag.py | java -Djava.awt.headless=true -jar ./.rsrc/plantuml-mit-1.2024.6.jar -p -Tpng > seqdiag.png
 ```
 
 ### Zeek Offline Mode
 
 ```
-cd ~/napx
-zeek -r demo.pcap Log::logdir=./logs/zeek Log::default_writer=JSON
-zeek -r /path/to/capture.pcap -e 'redef Log::default_logdir="./logs/zeek"; redef Log::default_writer=Log::WRITER_JSON;'
-
+cd ~/napx_demo/logs
+zeek -C -r ../demo.pcap LogAscii::use_json=T
+ls -lah
+#should see all zeek logs
 ```
-
-
-
 ### Splunk Import
 
-To import the offline 
+To import the Suricata eve.json into Splunk:
 
 ```
 cd /opt/splunk/bin/
 sudo ./splunk add index suricata
 sudo ./splunk add oneshot ~/napx_demo/logs/suricata/eve.json -index suricata -sourcetype _json
+```
+
+To import the Zeek logs into Splunk:
+
+```
+cd ~/napx_demo/.rsrc
+sudo chmod +x ./zeek_oneshot.sh
+sudo ./zeek_oneshot.sh
+```
+
+To login in to Splunk
+```
 firefox http://127.0.0.1:8000
 #credentials st0ne_fish/st0nefish
 ```
 ### Annotated Screenshots
+
+Welcome to the analysis phase. It's now time to prove your mettle as a network analyst. Using Splunk to investigate the alerts and logs, investigate the alerts
