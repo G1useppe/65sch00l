@@ -16,13 +16,6 @@ sudo /opt/splunk/bin/splunk remove index zeek
 sudo /opt/splunk/bin/splunk remove index suricata
 sudo /opt/splunk/bin/splunk add index zeek
 sudo /opt/splunk/bin/splunk add index suricata
-
-# Run the following 3 commands to populate the .rsrc folder
-wget https://raw.githubusercontent.com/G1useppe/65sch00l/main/NAPX/.rsrc/plantuml-mit-1.2024.6.jar -P ~/napx_demo/.rsrc
-
-wget https://raw.githubusercontent.com/G1useppe/65sch00l/main/NAPX/.rsrc/xprint-seq-diagram-filter-high-alerts.py -P ~/napx_demo/.rsrc
-
-wget https://raw.githubusercontent.com/G1useppe/65sch00l/main/NAPX/.rsrc/zeek_oneshot.sh -P ~/napx_demo/.rsrc 
 ```
 ### Metadata Review
 To grab the essential metadata from the PCAP, we can use the inbuilt Wireshark CLI program *capinfos*.
@@ -89,14 +82,16 @@ With the Suricata logs produced, a sequence diagram can be produced.
 ```
 cd ~/napx_demo/
 cp ~/napx_demo/logs/suricata/eve.json ./.rsrc/
-python3 ./.rsrc/seqdiag.py | java -Djava.awt.headless=true -jar ./.rsrc/plantuml-mit-1.2024.6.jar -p -Tpng > seqdiag.png
+cd .rsrc
+python3 ./seqdiag.py | java -Djava.awt.headless=true -jar ./plantuml-mit-1.2024.6.jar -p -Tpng > ~/napx_demo/seqdiag.png
+rm eve.json
 ```
 
 ### Zeek Offline Mode
 
 ```
-cd ~/napx_demo/logs
-zeek -C -r ../demo.pcap LogAscii::use_json=T
+cd ~/napx_demo/logs/zeek
+zeek -C -r ../../demo.pcap LogAscii::use_json=T
 ls -lah
 #should see all zeek logs
 ```
@@ -106,7 +101,6 @@ To import the Suricata eve.json into Splunk:
 
 ```
 cd /opt/splunk/bin/
-sudo ./splunk add index suricata
 sudo ./splunk add oneshot ~/napx_demo/logs/suricata/eve.json -index suricata -sourcetype _json
 ```
 
