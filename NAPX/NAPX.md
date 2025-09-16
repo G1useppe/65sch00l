@@ -22,7 +22,7 @@ wget https://raw.githubusercontent.com/G1useppe/65sch00l/main/NAPX/.rsrc/plantum
 
 wget https://raw.githubusercontent.com/G1useppe/65sch00l/main/NAPX/.rsrc/xprint-seq-diagram-filter-high-alerts.py -P ~/napx_demo/.rsrc
 
-wget https://raw.githubusercontent.com/G1useppe/65sch00l/main/NAPX/.rsrc/zeek_oneshot.sh -P ~/napx_demo/.rsrc
+wget https://raw.githubusercontent.com/G1useppe/65sch00l/main/NAPX/.rsrc/zeek_oneshot.sh -P ~/napx_demo/.rsrc 
 ```
 ### Metadata Review
 To grab the essential metadata from the PCAP, we can use the inbuilt Wireshark CLI program *capinfos*.
