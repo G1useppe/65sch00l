@@ -121,7 +121,9 @@ sudo ./zeek_oneshot.sh
 To login in to Splunk
 ```
 firefox http://127.0.0.1:8000
-#credentials st0ne_fish/st0nefish
+#credentials
+Username:st0ne_fish
+Password:st0nefish
 ```
 ### Annotated Screenshots
 
