@@ -111,24 +111,10 @@ Write-Host "[+] Cleanup complete." -ForegroundColor Green
 
 ## Answers
 
-1. Identify the suspicious "flag" on the system and provide the command used to get it ( hint, it isn't "flag.txt" but it might be close to that)
-There is 3 flags 
-
+1. **Flag Hunt**
 flag.txt.txt
 theflag.txt
 real_flag.txt
-
-fake: flag.txt
-```
-Get-ChildItem -Path C:\ -Include '*flag*.txt' -File -Recurse -Force -ErrorActio
-n SilentlyContinue
-```
-
-
-
-
-1. **Flag Hunt**
-    
 
 ```
 Get-ChildItem -Path C:\ -Include '*flag*.txt' -File -Recurse -Force -ErrorActio
