@@ -17,7 +17,7 @@ sudo /opt/splunk/bin/splunk remove index suricata
 sudo /opt/splunk/bin/splunk add index zeek
 sudo /opt/splunk/bin/splunk add index suricata
 
-
+# Copy paste the below to populate your .rsrc folder 
 wget -P ~/napx_demo/.rsrc https://raw.githubusercontent.com/G1useppe/65sch00l/main/NAPX/.rsrc/plantuml-mit-1.2024.6.jar
 wget -P ~/napx_demo/.rsrc https://raw.githubusercontent.com/G1useppe/65sch00l/main/NAPX/.rsrc/xprint-seq-diagram-filter-high-alerts.py
 wget -P ~/napx_demo/.rsrc https://raw.githubusercontent.com/G1useppe/65sch00l/main/NAPX/.rsrc/zeek_oneshot.sh
