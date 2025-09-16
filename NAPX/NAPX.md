@@ -16,6 +16,13 @@ sudo /opt/splunk/bin/splunk remove index zeek
 sudo /opt/splunk/bin/splunk remove index suricata
 sudo /opt/splunk/bin/splunk add index zeek
 sudo /opt/splunk/bin/splunk add index suricata
+
+# Run the following 3 commands to populate the .rsrc folder
+wget https://raw.githubusercontent.com/G1useppe/65sch00l/main/NAPX/.rsrc/plantuml-mit-1.2024.6.jar -P ~/napx_demo/.rsrc
+
+wget https://raw.githubusercontent.com/G1useppe/65sch00l/main/NAPX/.rsrc/xprint-seq-diagram-filter-high-alerts.py -P ~/napx_demo/.rsrc
+
+wget https://raw.githubusercontent.com/G1useppe/65sch00l/main/NAPX/.rsrc/zeek_oneshot.sh -P ~/napx_demo/.rsrc
 ```
 ### Metadata Review
 To grab the essential metadata from the PCAP, we can use the inbuilt Wireshark CLI program *capinfos*.
