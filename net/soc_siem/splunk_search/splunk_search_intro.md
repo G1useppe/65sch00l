@@ -171,27 +171,4 @@ index=zeek sourcetype=bro_dns | stats count by query | sort count | head 10
 
 ---
 
-## 8. Hands-On Exercises
-
-- **Exercise 1:** Search Sysmon logs for suspicious PowerShell.
-    
-- **Exercise 2:** Find rare domains in Zeek DNS data.
-    
-- **Exercise 3:** Build a dashboard of Suricata alert trends.
-    
-- **Exercise 4:** Create an alert for repeated failed logons.
-    
-- **Exercise 5:** Schedule a daily report of rare domains.
-    
-
----
-
-## 9. Key Takeaways
-
-- Splunk is your central hub for hunting.
-    
-- Supports multi-source log analysis (Velociraptor, Zeek, Suricata, Sysmon).
-    
-- SPL = powerful search language.
-    
-- Dashboards = visualize; Alerts = real-time notify; Reports = repeatable summaries.
+# Capstone
