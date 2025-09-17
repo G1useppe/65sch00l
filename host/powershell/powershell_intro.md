@@ -191,6 +191,7 @@ Get-CimInstance Win32_Process -Filter "Name='powershell.exe'" |
 
 A network analyst has asked you to confirm that the network traffic they're seeing is coming from the host you're looking at, and if there's anything that could be causing that traffic (e.g., malicious process).
 
+How could you check this for them?
 ### Answers
 
 **Basic:**
@@ -221,6 +222,7 @@ Get-NetTCPConnection -State Established |
 Your team located some malware and are devising a remediation plan.  
 You need to make sure you remove all the persistence mechanisms for the malware.
 
+How might you go about checking persistence locations?
 ### Answers
 
 **Basic:**
@@ -247,35 +249,36 @@ Get-ScheduledTask | Select-Object TaskName, TaskPath, State
 
 ### Scenario
 
-During your hunt, you want to check for suspicious files that may have been dropped by malware, scripts used for persistence, or tools staged by an attacker.
+During your hunt, you want to check for suspicious **`.zip` files** that may have been dropped by malware, scripts used for persistence, or tools staged by an attacker.
 
 ### Answers
 
-**Basic:**
+**Basic:**  
+List all `.zip` files in a sensitive user area (like `AppData`).
 
 ```powershell
-Get-ChildItem -Path "C:\Users\$env:USERNAME\AppData" -Recurse -File | Select-Object FullName
-
+Get-ChildItem -Path "C:\Users\$env:USERNAME\AppData" -Recurse -Include *.zip -ErrorAction SilentlyContinue
 ```
 
-**Upgraded:**  
-Find recently created files (last 7 days):
+**Upgraded 1:**  
+Find **recently created `.zip` files** (last 7 days) anywhere under `C:\Users\`.
 
 ```powershell
-Get-ChildItem -Path C:\Users\ -Recurse -File |
-  Where-Object { $_.CreationTime -gt (Get-Date).AddDays(-7) } |
-  Select-Object FullName, CreationTime
+Get-ChildItem -Path C:\Users\ -Recurse -Include *.zip -File -ErrorAction SilentlyContinue |   Where-Object { $_.CreationTime -gt (Get-Date).AddDays(-7) } |   Select-Object FullName, CreationTime
 ```
 
-Find executables/scripts in unusual locations:
+**Upgraded 2:**  
+Look for `.zip` files in **unusual or high-risk folders** (like `Temp`, `Downloads`, `AppData`).
 
 ```powershell
-Get-ChildItem -Path C:\Users\ -Recurse -Include *.exe,*.dll,*.bat,*.ps1 -ErrorAction SilentlyContinue
+$targets = @('C:\Users\*\AppData','C:\Users\*\Downloads','C:\Users\*\AppData\Local\Temp') foreach ($path in $targets) {
+   Get-ChildItem -Path $path -Recurse -Include *.zip -ErrorAction SilentlyContinue | Select-Object FullName, Directory }
 ```
 
 ---
 
 ## Installed Programs
+
 ### Scenario
 
 You want to confirm what software is installed on a host to look for potentially unwanted or malicious programs.
@@ -284,12 +287,16 @@ You want to confirm what software is installed on a host to look for potentially
 
 **Basic:**
 
-`Get-WmiObject Win32_Product`
+```powershell
+Get-WmiObject Win32_Product
+```
 
 **Upgraded (faster, cleaner):**
 
-`Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* |   Select-Object DisplayName, DisplayVersion, Publisher, InstallDate`
-
+```powershell
+Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* |
+  Select-Object DisplayName, DisplayVersion, Publisher, InstallDate
+```
 
 ---
 
@@ -303,15 +310,23 @@ You suspect suspicious logon activity and want to check the **Security** event l
 
 **Basic:**
 
-`Get-EventLog -LogName Security`
+```powershell
+Get-EventLog -LogName Security
+```
 
 **Upgraded (logon events only):**
 
-`Get-EventLog -LogName Security -InstanceId 4624 -Newest 10 |   Select-Object TimeGenerated, ReplacementStrings`
+```powershell
+Get-EventLog -LogName Security -InstanceId 4624 -Newest 10 |
+  Select-Object TimeGenerated, ReplacementStrings
+```
 
 **Upgraded (filter with Get-WinEvent):**
 
-`Get-WinEvent -LogName Security -FilterHashtable @{Id=4624} |   Select-Object TimeCreated, Id, Message -First 20`
+```powershell
+Get-WinEvent -LogName Security -FilterHashtable @{Id=4624} |
+  Select-Object TimeCreated, Id, Message -First 20
+```
 
 ---
 
@@ -319,21 +334,28 @@ You suspect suspicious logon activity and want to check the **Security** event l
 
 ### Scenario
 
-You want to see what has been executed on the host to look for suspicious commands or programs.
+You want to see what has been executed on the host to look for suspicious programs.
 
 ### Answers
 
 **Basic (Prefetch — requires admin):**
 
-`Get-ChildItem C:\Windows\Prefetch`
+```powershell
+Get-ChildItem C:\Windows\Prefetch
+```
 
 **Upgraded (show file names + creation time):**
 
-`Get-ChildItem C:\Windows\Prefetch |   Select-Object Name, CreationTime, LastWriteTime`
+```powershell
+Get-ChildItem C:\Windows\Prefetch |
+  Select-Object Name, CreationTime, LastWriteTime
+```
 
 **Upgraded (ShimCache / AppCompatCache — from registry):**
 
-`Get-ItemProperty HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\AppCompatCache`
+```powershell
+Get-ItemProperty HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\AppCompatCache
+```
 
 ---
 #powershell_activity1
