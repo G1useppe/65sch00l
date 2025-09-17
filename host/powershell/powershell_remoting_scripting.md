@@ -1,7 +1,8 @@
 
 # PowerShell Remoting
 
-## ** NEED TO USE RANGE**
+## ** FIX **
+Need range to accurately test this and remote use of scripts.
 
 # PowerShell Scripting
 
