@@ -18,7 +18,7 @@ Velociraptor functions as an **endpoint agent**. Once installed on endpoints, it
 5. **Integration**: Results can be fed into a SIEM for centralized visibility.
 
 
-![](65school/host/velociraptor/attachments/Pasted%20image%2020250917104058.png)
+![](attachments/Pasted%20image%2020250917104058.png)
 - 
 
 ## What Do We Need to Know About Velociraptor?

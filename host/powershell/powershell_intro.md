@@ -15,7 +15,7 @@
 
 `Verb-Noun -Parameter Value (-Parameter Additional)`
 
-![Pasted image 20250915111917.png](65school/host/powershell/attachments/Pasted%20image%2020250915111917.png)
+![Pasted image 20250915111917.png](attachments/Pasted%20image%2020250915111917.png)
 
 ---
 
