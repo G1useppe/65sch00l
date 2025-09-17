@@ -38,9 +38,13 @@ _(Insert diagram here showing endpoints → Velociraptor server → SIEM)_
 ### 2. Installing Velociraptor on Endpoints
 
 - Installation requires generating a **client configuration file** from the Velociraptor server.
-- The agent binary is then distributed to endpoints (via GPO, SCCM, Intune, etc.).
+	- This gets generated automatically during the kit build process.
+- The agent binary is then distributed to endpoints
+	- This is preferably done via Group Policy.
+	- PowerShell alternative.
+- Velociraptor is installed on endpoints (usually as as service for persistence)
 - Once launched, the agent connects securely back to the server.
-- Supports Windows, Linux, and macOS.
+
 ### 3. Navigating the Velociraptor GUI
 
 - **Dashboard**: Overview of connected clients and ongoing hunts.
@@ -48,7 +52,6 @@ _(Insert diagram here showing endpoints → Velociraptor server → SIEM)_
 - **Notebooks**: Interactive workspaces for storing queries, notes, and results.
 	- If you need to quickly check the output of a hunt - check here.
 - **Artefact Repository**: Library of artefacts to pull from endpoints.
-- **Results View**: Collected artefacts can be viewed, filtered, and exported.
 
 ### 4. What Artefacts to Pull
 
