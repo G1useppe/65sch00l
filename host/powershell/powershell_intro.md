@@ -540,7 +540,7 @@ $count = (Get-WinEvent -FilterHashtable @{LogName='Security'; Id=4625} -MaxEvent
 ```powershell
 $results | Export-Csv -Path ping.csv -NoTypeInformation
 ```
-
+-NoTypeInformation stops PowerShell from default adding a line at the top of the output
 **Concepts:** persistence, analyst handoff.
 
 ### Alternative Example — Process Inventory Export (Local)
@@ -589,30 +589,7 @@ Get-NetTCPConnection | Where-Object { $_.State -eq 'Listen' } | Select-Object Lo
 - **Active Connections:** `Get-NetTCPConnection | Group-Object RemoteAddress`
     
 
----
-
-## Capstone Idea
-
-Combine **ping sweep** with one or more **alternative checks** (e.g., processes, event logs, netstat) and produce a **CSV/HTML triage report** with a simple `RiskScore`. Students learn:
-
-- Modular script structure
-    
-- Combining telemetry types
-    
-- Prioritizing results for investigation
-    
-
----
-
-## Safety & Ethics Reminder
-
-	All scripts must run in **isolated lab networks** with permission. Do **not** scan production environments. The purpose is to practice **hunting skills**, not to disrupt real systems.
----
-
 ## Capstone: Assemble your own script
 
 
-
-
-
----
+Create a PowerShell script which preforms something which you might consider **useful for a hunt scenario**. Output your results so that they're formatted similar to examples above and so that it is saved as a file. 
