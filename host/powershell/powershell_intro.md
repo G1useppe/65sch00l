@@ -210,6 +210,8 @@ Get-NetTCPConnection -State Established |
   Select-Object LocalAddress, LocalPort, RemoteAddress, RemotePort, OwningProcess
 ```
 
+**Note**: In this case netstat -bano might be a preferable output to read as "OwningProcess" will only provide the PID for the process whereas -b will prove the binary name
+
 ---
 
 ## 🔒 Persistence
