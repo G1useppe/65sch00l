@@ -10,18 +10,16 @@ Velociraptor functions as an **endpoint agent**. Once installed on endpoints, it
 
 ### High-Level Workflow
 
-1. **Deployment**: Velociraptor agents are installed on endpoints.
-    
-2. **Collection**: Agents continuously or on-demand collect artefacts.
-    
-3. **Querying**: Analysts query artefacts through the Velociraptor GUI.
-    
-4. **Integration**: Results can be fed into a SIEM for centralized visibility.
-    
+1. **Environment setup:** Hunt server will be connected to client network.
+	1. Either at the **Firewall**(likely) or **Switch**(Preferred, no firewall rules)
+2. **Deployment**: Velociraptor agents are installed on endpoints.
+3. **Collection**: Agents continuously or on-demand collect artefacts.
+4. **Querying**: Analysts query artefacts through the Velociraptor GUI.
+5. **Integration**: Results can be fed into a SIEM for centralized visibility.
 
-_(Insert diagram here showing endpoints → Velociraptor server → SIEM)_
 
----
+![](65school/host/velociraptor/attachments/Pasted%20image%2020250917104058.png)
+- 
 
 ## What Do We Need to Know About Velociraptor?
 
@@ -37,13 +35,28 @@ _(Insert diagram here showing endpoints → Velociraptor server → SIEM)_
 
 ### 2. Installing Velociraptor on Endpoints
 
-- Installation requires generating a **client configuration file** from the Velociraptor server.
-	- This gets generated automatically during the kit build process.
-- The agent binary is then distributed to endpoints
-	- This is preferably done via Group Policy.
-	- PowerShell alternative.
-- Velociraptor is installed on endpoints (usually as as service for persistence)
-- Once launched, the agent connects securely back to the server.
+- **Generate Client Config**
+    - On the Velociraptor server, create a `client.config.yaml` that contains server address, TLS certs, and keys.
+    - Embed this config into the agent installer.
+        
+- **Build Installers**
+    - Create small agent packages (MSI/EXE for Windows, binaries for Linux/macOS).
+    - These come preconfigured to check in with your hunt server.
+	    
+- **Host agent**
+	- HTTP Server on velociraptor server can host the agent which can be retrieved by endpoints. eg. `wget http://Velociraptorserver:port/velociraptorinstall.exe`
+        
+- **Distribute Agents**
+    - **Enterprise tools**: Group Policy, Ansible ( Discuss with local defenders)
+    - **Scripts**: PowerShell or shell scripts for bulk or ad-hoc installs.
+    - **Manual installs**: For isolated or high-value systems.
+        
+- **Run as a Service**
+    - Agents install as a background service/daemon so they persist after reboots.
+    
+- **Verify Check-in**
+    - Confirm endpoints appear in the Velociraptor GUI under _Clients_.
+    - From there, start hunts or queries.
 
 ### 3. Navigating the Velociraptor GUI
 
