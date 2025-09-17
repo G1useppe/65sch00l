@@ -106,7 +106,7 @@ Get-ComputerInfo | Select-Object CsName, WindowsProductName, WindowsVersion, OsH
 
 ---
 
-## 👤 User Accounts
+##  User Accounts
 
 ### Scenario
 
@@ -134,7 +134,7 @@ Get-ADUser <username> -Properties LastLogonDate | Select-Object SamAccountName, 
 
 ---
 
-## ⚙️ Processes & Services
+##  Processes & Services
 
 ### Scenario
 
@@ -185,7 +185,7 @@ Get-CimInstance Win32_Process -Filter "Name='powershell.exe'" |
 
 ---
 
-## 🌐 Network & Remote Connections
+##  Network & Remote Connections
 
 ### Scenario
 
@@ -215,7 +215,7 @@ Get-NetTCPConnection -State Established |
 
 ---
 
-## 🔒 Persistence
+##  Persistence
 
 ### Scenario
 
@@ -245,7 +245,7 @@ Get-ScheduledTask | Select-Object TaskName, TaskPath, State
 
 ---
 
-## 📂 File System
+##  File System
 
 ### Scenario
 
