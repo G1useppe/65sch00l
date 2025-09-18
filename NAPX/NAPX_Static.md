@@ -12,6 +12,9 @@ cd logs
 mkdir suricata zeek
 cd ..
 cp ~/Documents/.rsrc/* ./.rsrc
+#credentials
+#Username:st0ne_fish
+#Password:st0nefish
 sudo /opt/splunk/bin/splunk remove index zeek
 sudo /opt/splunk/bin/splunk remove index suricata
 sudo /opt/splunk/bin/splunk add index zeek
