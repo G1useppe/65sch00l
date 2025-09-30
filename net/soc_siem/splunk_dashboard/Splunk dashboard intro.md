@@ -39,15 +39,21 @@
 
 # Step 4 - Merging filter with search query
 
-To filter on data values which are present in your search query you need tie the value which you're searching on to the value already present in the search query. 
-- Eg. If I wanted to search for a specific process I'll need to set the "process" field within the search query to a "token field" which i assign. 
+To filter on data values which are present in your search query you need tie the value which you're filtering on to the value already present in the search query. 
+- Eg. If I wanted to search for a specific process (Eg. Powershell.exe) I'll need to set the "process" field within the search query to be equal to "token field" which i assign.
+	- Eg. Process=\$field1$ - If i was searching for Powershell.exe token1 will become "Powershell.exe" hence searching for instances where Process=Powershell.exe (see below)
+
 
 ![](65school/net/soc_siem/splunk_dashboard/attachments/step5.png)
 
 # Step 5 - Complete
+
+- In this image "field1" is set to * by default which will search for any processes.
 
 ![](65school/net/soc_siem/splunk_dashboard/attachments/Step6%201.png)
 
 
 ![](65school/net/soc_siem/splunk_dashboard/attachments/step7.png)
 
+- Here you can see the processes being filtered to just search for PowerShell.exe.
+- Powershell.exe has been substituted into the "field1" in the search query
