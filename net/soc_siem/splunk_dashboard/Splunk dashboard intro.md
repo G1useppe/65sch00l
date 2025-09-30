@@ -27,6 +27,11 @@
 - At this point you need to pick a filter which is relevant to the data you're trying to search for.
 	- eg. If you're trying to look for a specific process name "text" might be a good choice.
 	- If you're looking for a specific IP address you might use "multiselect"
+- "Token" - the field which is substituted into the search query which you originally made.
+- "Default" - What will be loaded to the dashboard if no input is entered. 
+	- If this field is blank then the dashboard will not load. 
+- "Initial value" - What the dashboard will load by Initially.
+	- "\*" is a safe choice for this as it will let the dashboard load as if nothing was searched for yet.
 
 ![](65school/net/soc_siem/splunk_dashboard/attachments/step3.png)
 
@@ -35,7 +40,7 @@
 # Step 4 - Merging filter with search query
 
 To filter on data values which are present in your search query you need tie the value which you're searching on to the value already present in the search query. 
-- Eg. If i wanted to search for a specific process I'll need to 
+- Eg. If I wanted to search for a specific process I'll need to set the "process" field within the search query to a "token field" which i assign. 
 
 ![](65school/net/soc_siem/splunk_dashboard/attachments/step5.png)
 
