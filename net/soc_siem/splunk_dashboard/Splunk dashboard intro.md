@@ -56,4 +56,6 @@ To filter on data values which are present in your search query you need tie the
 ![](65school/net/soc_siem/splunk_dashboard/attachments/step7.png)
 
 - Here you can see the processes being filtered to just search for PowerShell.exe.
-- Powershell.exe has been substituted into the "field1" in the search query
+- Powershell.exe has been substituted into the "field1" in the search query. 
+
+**Side note:** If you've been following along you can select the **magnifying glass icon** in the bottom right of the dashboard table to view the filtered search query. 
