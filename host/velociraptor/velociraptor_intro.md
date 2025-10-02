@@ -31,7 +31,7 @@ Velociraptor functions as an **endpoint agent**. Once installed on endpoints, it
 - Key use cases:
     - Searching for persistence mechanisms.
     - Identifying suspicious processes.
-    - Extracting forensic artefacts such as Prefetch files or browser history.
+    - Extracting forensic artefacts such as prefetch files or browser history.
 
 ### 2. Installing Velociraptor on Endpoints
 
