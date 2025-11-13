@@ -1,33 +1,50 @@
+[suricata_a4.md](https://github.com/user-attachments/files/23516547/suricata_a4.md)
 # Lesson 4 — Live Capture Using Tcpreplay and Wireshark
 
 ## Summary
-Replay static PCAPs to a live interface and observe the traffic in real time using Wireshark.
+Replay packet captures onto a loopback interface and analyze the live traffic in Wireshark.
 
 ## Prepare
-```bash
-# cd ~/65sch00l/net/suricata_arkime/suricata_a4
+
+Set up your workspace and verify required tools.
+
+```bash - st0ne_fish
+cd ~/65sch00l/net/suricata_arkime/suricata_a4
+mkdir demo_logs
+mkdir fight_logs
 which tcpreplay
 which wireshark
-
-# git clone https://github.com/65sch00l/network-tradecraft.git ~/65sch00l
 ```
 
-Dataset:
-Use `./.rsrc/suspicious-dns.pcap`.
+Dataset:  
+Use the provided `./.rsrc/demo.pcap` and `./.rsrc/fightson.pcap` files.
 
 ## Brief
-Demonstrate how to replay packet captures safely to a loopback interface for live observation.
+
+Demonstrate how to safely replay traffic on a loopback interface for observation.  
+Wireshark can be used to validate timing, payloads, and reconstruction of sessions.
+
+```bash - st0ne_fish
+sudo tcpreplay -i lo ./.rsrc/demo.pcap
+wireshark -k -i lo
+```
+
+Discuss replay speed, isolation, and capture fidelity.  
+Observe how timestamps differ from static inspection.
 
 ## Execute — Fights On
-1. Start Wireshark capturing on the loopback interface.
-2. Replay the traffic:
-   ```bash
-   sudo tcpreplay -i lo ./.rsrc/suspicious-dns.pcap
-   ```
-3. Observe sessions and note timestamps, retransmissions, and payloads.
-4. Annotate captured evidence and map to MITRE ATT&CK.
+
+Repeat the exercise using `fightson.pcap` while monitoring in Wireshark.
+
+```bash - st0ne_fish
+sudo tcpreplay -i lo ./.rsrc/fightson.pcap
+```
+
+Capture screenshots showing live packets, filters, and reconstructed conversations.  
+Highlight suspicious flows and relate them to MITRE ATT&CK techniques.
 
 ## Debrief
-- Configuring loopback captures
-- Observing replayed traffic in Wireshark
-- Relating live replay behavior to static analysis
+
+- Configuring safe local replay environments  
+- Observing live packet streams  
+- Comparing static vs live packet behavior
