@@ -1,36 +1,55 @@
+[suricata_a3.md](https://github.com/user-attachments/files/23516543/suricata_a3.md)
 # Lesson 3 — Capinfos and Sequence Diagramming
 
 ## Summary
-Use capinfos and sequence diagramming to visualize network flow and overlay Suricata alerts.
+Use capinfos and Wireshark to summarize network flow, visualize packet exchanges, and overlay Suricata alerts.
 
 ## Prepare
-```bash
-# cd ~/65sch00l/net/suricata_arkime/suricata_a3
-which capinfos
-which wireshark
-which suricata
 
-# git clone https://github.com/65sch00l/network-tradecraft.git ~/65sch00l
+Set up your environment and ensure tools are installed and ready.
+
+```bash - st0ne_fish
+cd ~/65sch00l/net/suricata_arkime/suricata_a3
+mkdir demo_logs
+mkdir fight_logs
+which suricata
+which wireshark
+which capinfos
+which jq
 ```
 
-Dataset:
-Use the provided `./.rsrc/sample-http.pcap`.
+Dataset:  
+Use the provided `./.rsrc/demo.pcap` and `./.rsrc/fightson.pcap` files.
 
 ## Brief
-Explain how to summarize traffic using capinfos and create sequence diagrams showing packet flow. 
-Integrate Suricata alerts to contextualize detections.
+
+Demonstrate how to use `capinfos` to summarize capture metadata and how to diagram packet flow.  
+Run Suricata to identify alerts, then visualize relationships and timing between endpoints.
+
+```bash - st0ne_fish
+capinfos ./.rsrc/demo.pcap
+suricata -r ./.rsrc/demo.pcap -k none --runmode single   -l ./demo_logs/ -vvv   -S /var/lib/suricata/rules/suricata.rules
+jq 'select(.event_type == "alert")' ./demo_logs/eve.json | head -10
+wireshark ./.rsrc/demo.pcap
+```
+
+Use Wireshark’s **Follow TCP Stream** to identify dialogue sequences and note source–destination order.  
+Represent the exchange as a sequence diagram (tool-based or manual).  
 
 ## Execute — Fights On
-1. Gather metadata:
-   ```bash
-   capinfos ./.rsrc/sample-http.pcap
-   ```
-2. Run Suricata in read mode and review alerts.
-3. Use Wireshark “Follow TCP Stream” to identify communication flow.
-4. Create a sequence diagram (manual or tool-based) showing packet exchange.
-5. Annotate key detections and MITRE mappings.
+
+Repeat using `fightson.pcap`.
+
+```bash - st0ne_fish
+suricata -r ./.rsrc/fightson.pcap -k none --runmode single   -l ./fight_logs/ -vvv   -S /var/lib/suricata/rules/suricata.rules
+capinfos ./.rsrc/fightson.pcap
+```
+
+Review the flow in Wireshark and identify notable sequences or anomalies.  
+Overlay Suricata alert data on the diagram and map to MITRE ATT&CK behaviors.
 
 ## Debrief
-- Extracting traffic statistics with capinfos
-- Visualizing flows via diagrams
-- Overlaying detections for context
+
+- Using `capinfos` for quick traffic summaries  
+- Translating packet capture into flow diagrams  
+- Integrating IDS detections into sequence analysis
