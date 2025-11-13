@@ -1,4 +1,3 @@
-[suricata_a3.md](https://github.com/user-attachments/files/23516543/suricata_a3.md)
 # Lesson 3 — Capinfos and Sequence Diagramming
 
 ## Summary
