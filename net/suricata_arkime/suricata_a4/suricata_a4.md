@@ -1,4 +1,3 @@
-[suricata_a4.md](https://github.com/user-attachments/files/23516547/suricata_a4.md)
 # Lesson 4 — Live Capture Using Tcpreplay and Wireshark
 
 ## Summary
@@ -25,8 +24,10 @@ Demonstrate how to safely replay traffic on a loopback interface for observation
 Wireshark can be used to validate timing, payloads, and reconstruction of sessions.
 
 ```bash - st0ne_fish
-sudo tcpreplay -i lo ./.rsrc/demo.pcap
-wireshark -k -i lo
+sudo tcpreplay -i lo -K -pps 100 demo.pcap
+sudo wireshark -k -i lo
+sudo suricata -i lo -k none -vvv -l ./demo_logs/
+tail -f ./demo_logs/fast.log
 ```
 
 Discuss replay speed, isolation, and capture fidelity.  
