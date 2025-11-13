@@ -32,6 +32,7 @@ cp ./demo_logs/eve.json ./.rsrc/
 cd .rsrc
 python3 ./seqdiag.py | java -Djava.awt.headless=true -jar ./plantuml-mit-1.2024.6.jar -p -Tpng > ../seqdiag.png
 rm eve.json
+eog seqdiag.png
 cd ..
 wireshark ./.rsrc/demo.pcap
 ```
