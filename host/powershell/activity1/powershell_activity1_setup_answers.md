@@ -124,7 +124,8 @@ n SilentlyContinue
 2. **Process Discovery**
     
 
-`Get-Process pythonw | Select-Object Id, Path Get-WmiObject Win32_Process -Filter "Name='pythonw.exe'" | Select-Object ProcessId, CommandLine`
+`Get-Process pythonw | Select-Object Id, Path 
+Get-WmiObject Win32_Process -Filter "Name='pythonw.exe'" | Select-Object ProcessId, CommandLine | format-list`
 
 3. **Parent Process Investigation**
     
