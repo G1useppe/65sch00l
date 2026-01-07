@@ -31,8 +31,8 @@ To grab the essential metadata from the PCAP, we can use the inbuilt Wireshark C
 
 ```
 cd ~/napx_demo
-capinfos -A ./demo.pcap > ./capinfos_20200508.txt
-cat ./capinfos_20200508.txt
+capinfos -A ./demo.pcap > ./capinfos.txt
+cat ./capinfos.txt
 ```
 
 The output from *capinfos* is a powerful means of gaining an overview of the dataset.
