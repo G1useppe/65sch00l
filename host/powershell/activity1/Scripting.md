@@ -68,11 +68,15 @@ else {
 **Compartor Operator**
 
 The value on the left is what your comparing too. 
--eq -> Equal
+-eq -> Equal  
+
 -ne -> not equal
--gt -> Greater than
--ge -> Greater than equal too
--lt -> less than
+-gt -> Greater than  
+
+-ge -> Greater than equal too  
+
+-lt -> less than  
+
 -le -> less than equal too
 
 <br>
