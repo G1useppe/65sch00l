@@ -1,6 +1,6 @@
 <h1>Scripting</h1>
 <br>
-
+<br>
 **Object-Oriented design**
 
 Power Shell is an Object Orientated language.
@@ -13,8 +13,8 @@ When you run Get-Process on your computer you see every process having an Id, Na
 Classes define how an object is created.
 
 An object is an instance of a class for example seeing a cmd.exe process being spawned. 
-
-
+<br>
+<br>
 **Types of Variables**
 
 Assign a string
@@ -31,7 +31,8 @@ $bool = $true
 
 Assign an array
 $array = 1,2,3 OR $names = @("Mario", "Luigi", "Peach")
-
+<br>
+<br>
 **Conditional Statement**
 
 Types of conditition
@@ -41,7 +42,8 @@ if -> Check if the condition inside this statement is true if not move on to the
 elseif -> If multiple if statements are being used you can add multiple elseif statements
 
 else -> If no conditions are met then run the else statement
-
+<br>
+<br>
 **Lab 1 Process Check**
 ```
 if (Get-Process -Name $procName -ErrorAction silentlyContinue) {
@@ -58,6 +60,9 @@ else {
 
     Write-Host "$procName is not running."
 }
+
+<br>
+<br>
 ```
 
 **Compartor Operator**
@@ -70,6 +75,8 @@ The value on the left is what your comparing too.
 -lt -> less than
 -le -> less than equal too
 
+<br>
+<br>
 **ForEach Loops**
 
 Able to loop through an array and gather data from it. 
