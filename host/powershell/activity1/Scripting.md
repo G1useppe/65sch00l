@@ -70,7 +70,8 @@ else {
 The value on the left is what your comparing too. 
 -eq -> Equal  
 
--ne -> not equal
+-ne -> not equal  
+
 -gt -> Greater than  
 
 -ge -> Greater than equal too  
