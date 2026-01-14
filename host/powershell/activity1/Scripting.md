@@ -1,4 +1,4 @@
-<h1>**Scripting**</h1>
+<h1>Scripting</h1>
 
 **Object-Oriented design**
 
