@@ -48,3 +48,29 @@ if ($checker -eq 0) {
     Write-Host "Password is valid"
 }
 ```
+**Challenge Lab Solution**
+```
+#Array of integers 
+$nums = @(2,7,11,15)
+
+#Target number
+$target = 9
+
+
+$value = 0
+foreach ($i in $nums) {
+
+    foreach ($j in $nums) {
+        $sum = $i + $j
+        if ($sum -eq $target) {
+            Write-Host "Target Found $i, $j"
+            $value = 1
+        }
+
+    }
+    if ($value -eq 1) {
+        break
+    }
+
+}
+```
