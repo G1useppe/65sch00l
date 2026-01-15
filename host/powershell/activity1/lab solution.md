@@ -1,7 +1,7 @@
 <h1>Lab Solution</h1>
 
 **Lab 1 Process Check**
-
+```
 # Get user input for process name
 $procName = Read-Host "Enter a process name"
 
@@ -11,8 +11,9 @@ if (Get-Process -Name $procName -ErrorAction SilentlyContinue) {
 } else {
     Write-Host "$procName is not running" -ForegroundColor Red
 }
-
+```
 **Lab 2 Grade Checker**
+```
 # Get user input and convert to integer
 $mark = [int](Read-Host "Enter your class mark (0-100)")
 
@@ -28,3 +29,22 @@ if ($mark -gt 50 -and $mark -le 65) {
 } else {
     Write-Host "Failed or invalid mark" -ForegroundColor Red
 }
+```
+**Lab 3 For loop**
+```
+$oldpasslist = @("password", "admin1", "imisscraggs!", "northstar22")
+$newpass = Read-Host "Enter your new password"
+
+$checker = 0
+foreach ($password in $oldpasslist) {
+    if ($newpass -eq $password) {
+        $checker = 1
+        Write-Host "This password has been used before, pick another!"
+        break
+    }
+}
+
+if ($checker -eq 0) {
+    Write-Host "Password is valid"
+}
+```
