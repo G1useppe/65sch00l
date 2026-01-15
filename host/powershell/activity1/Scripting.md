@@ -43,27 +43,6 @@ elseif -> If multiple if statements are being used you can add multiple elseif s
 
 else -> If no conditions are met then run the else statement
 <br>
-<br>
-**Lab 1 Process Check**
-```
-if (Get-Process -Name $procName -ErrorAction silentlyContinue) {
-    
-    if ($important -contains $procName) {
-        Write-Host "$procName is important!"
-    }
-    else {
-
-        Write-Host "$procName is running"
-    }
-}
-else {
-
-    Write-Host "$procName is not running."
-}
-
-<br>
-<br>
-```
 
 **Compartor Operator**
 
