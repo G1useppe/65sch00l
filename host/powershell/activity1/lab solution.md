@@ -1,52 +1,30 @@
 <h1>Lab Solution</h1>
 
-<br>
+**Lab 1 Process Check**
 
-**Lab 1**
-Process Checks
+# Get user input for process name
+$procName = Read-Host "Enter a process name"
 
-<br>
-```
-#Get user input for a string
-$procname = Read-Host "Give me a process 
-string"
-
-#Check if the process name given from user 
-is running on the system
-if (Get-Process -Name $procname 
--ErrorAction SilentlyContinue) {
-    Write-Host "$procname is running"
+# Check if process is running
+if (Get-Process -Name $procName -ErrorAction SilentlyContinue) {
+    Write-Host "$procName is running" -ForegroundColor Green
+} else {
+    Write-Host "$procName is not running" -ForegroundColor Red
 }
-#Print out that the process is not running
-else {
-    Write-Host "$procname is not running"
-}
-```
 
-<br>
+**Lab 2 Grade Checker**
+# Get user input and convert to integer
+$mark = [int](Read-Host "Enter your class mark (0-100)")
 
-**Lab 2**
-<br>
-```
-# Get user input class marks
-$value = Read-Host "Give me your class 
-mark!!"
-
-# Convert to integer
-$mark = [int]$value
-
-# Check if we can pass
+# Grade evaluation
 if ($mark -gt 50 -and $mark -le 65) {
-    Write-Host "You passed!"
+    Write-Host "You passed!" -ForegroundColor Yellow
+} elseif ($mark -gt 65 -and $mark -le 75) {
+    Write-Host "You got a Credit!" -ForegroundColor Cyan
+} elseif ($mark -gt 75 -and $mark -le 85) {
+    Write-Host "You got a Distinction!" -ForegroundColor Magenta
+} elseif ($mark -gt 85 -and $mark -le 100) {
+    Write-Host "High Distinction! Excellent work!" -ForegroundColor Green
+} else {
+    Write-Host "Failed or invalid mark" -ForegroundColor Red
 }
-elseif ($mark -gt 65 -and $mark -le 75) {
-    Write-Host "You got credit!"
-}
-elseif ($mark -gt 75 -and $mark -le 85) {
-    Write-Host "You got distinction!"
-} 
-elseif ($mark -gt 85 -and $mark -le 100) {
-    Write-Host "Get a high distinction!"
-}
-
-```
