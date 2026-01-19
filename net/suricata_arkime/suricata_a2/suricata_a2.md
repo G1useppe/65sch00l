@@ -1,57 +1,130 @@
 # Lesson 2 — Suricata Read Mode and Wireshark
 
 ## Summary
-Use Suricata in offline mode to generate alerts and correlate them with packets in Wireshark.
+Use **Suricata in offline (read) mode** to generate alerts from a PCAP file and **correlate those alerts with packets in Wireshark**.
+
+---
 
 ## Prepare
+
+Update Suricata rules (Emerging Threats):
+
 ```bash
-#sudo pipx run suricata-update
-### grab rules from emerging threats
+sudo pipx run suricata-update
+```
+
+Prepare the working directory and dataset:
+
+```bash
 cd ~/65sch00l/net/suricata_arkime/suricata_a2
 cp ~/.rsrc/demo.pcap ./.rsrc/
 mkdir demo_logs
 mkdir fight_logs
+```
+
+Verify required tools are installed:
+
+```bash
 which suricata
 which wireshark
 which jq
-
 ```
 
-Dataset:
-Use the provided `./.rsrc/demo.pcap` file.
+### Dataset
+Use the provided PCAP file:
+
+```
+./.rsrc/demo.pcap
+```
+
+---
 
 ## Brief
-Demonstrate Suricata’s read mode and how to inspect EVE JSON logs. 
 
-``` st0ne_fish
-suricata -r .rsrc/demo.pcap -k none --runmode single -l ./demo_logs/ -vvv -S /var/lib/suricata/rules/suricata.rules
-### run suricata in offline mode (-r)
-### ignore checksums (-k)
-### --runmode single ensure single threaded processing, resulting in ordered logs (not desirable in production)
-### tell the logs where to write (-l)
-### verbosity (-v to -vvvvv) is great for troubleshooting
-### make sure we are hitting the right ruleset with -S
-tail ./demo_logs/eve.json | grep event_type
-### lets have a look at all of the logs we get - there are many different event_type values
-jq 'select(.event_type == "alert")' ./demo_logs/eve.json
-### lets sneak preview jq, a powerful json query utility that we'll touch on later on course
-cat ./demo_logs/fast.log
-### fast.log is configured to give quick, readable access to the alert event_type
-wireshark ./.rsrc/demo.pcap 
-### Show correlation of alerts with packets in Wireshark.
+In this lesson you will:
+
+- Run Suricata in **read mode** against an existing PCAP
+- Inspect **EVE JSON** output
+- Correlate Suricata alerts with packet-level data in Wireshark
+
+---
+
+## Demonstration — Suricata Read Mode
+
+Run Suricata in offline mode against the demo PCAP:
+
+```bash
+suricata -r .rsrc/demo.pcap   -k none   --runmode single   -l ./demo_logs/   -vvv   -S /var/lib/suricata/rules/suricata.rules
 ```
 
+### Command Flags Explained
+
+- `-r` — Read packets from a PCAP file (offline mode)
+- `-k none` — Ignore checksum validation (common for PCAP analysis)
+- `--runmode single` — Single-threaded execution  
+  - Ensures **ordered logs**
+  - Useful for learning and analysis (not recommended for production)
+- `-l` — Directory to write logs
+- `-v / -vvv` — Increase verbosity (helpful for troubleshooting)
+- `-S` — Explicitly specify the ruleset being used
+
+---
+
+## Inspecting Suricata Logs
+
+View event types being written to `eve.json`:
+
+```bash
+tail ./demo_logs/eve.json | grep event_type
+```
+
+Filter only alert events using `jq`:
+
+```bash
+jq 'select(.event_type == "alert")' ./demo_logs/eve.json
+```
+
+View the fast alert log:
+
+```bash
+cat ./demo_logs/fast.log
+```
+
+---
+
+## Packet Correlation with Wireshark
+
+Open the same PCAP in Wireshark:
+
+```bash
+wireshark ./.rsrc/demo.pcap
+```
+
+---
+
 ## Execute — Fights On
-1. Run Suricata in read mode:
-   ```st0ne_fish
-   mkdir fight_logs
-   suricata -r .rsrc/fights_on.pcap -k none --runmode single -l ./fight_logs/ -vvv -S /var/lib/suricata/rules/suricata.rules
-   ```
-2. Open the same PCAP in Wireshark to locate packets referenced in alerts.
-3. Annotate screenshots linking alerts and packet payloads.
-4. Map detections to MITRE ATT&CK (e.g., `T1040 – Network Sniffing`).
+
+Run Suricata against the second dataset:
+
+```bash
+mkdir fight_logs
+
+suricata -r .rsrc/fights_on.pcap   -k none   --runmode single   -l ./fight_logs/   -vvv   -S /var/lib/suricata/rules/suricata.rules
+```
+
+### Analyst Tasks
+
+- Open `fights_on.pcap` in Wireshark
+- Identify packets referenced in Suricata alerts
+- Annotate screenshots linking alerts and packet payloads
+- Map detections to **MITRE ATT&CK** (e.g., T1040 — Network Sniffing)
+
+---
 
 ## Debrief
-- Operating Suricata in read mode
+
+Students should now understand:
+
+- Operating Suricata in **read mode**
 - Cross-referencing alerts with packet data
 - Validating detection coverage
