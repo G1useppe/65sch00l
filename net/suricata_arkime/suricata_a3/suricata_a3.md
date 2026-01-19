@@ -15,6 +15,7 @@ which suricata
 which wireshark
 which capinfos
 which jq
+cp ../suricata_a2/demo_logs/* ./demo_logs/
 ```
 
 Dataset:  
@@ -27,7 +28,9 @@ Run Suricata to identify alerts, then visualize relationships and timing between
 
 ```bash - st0ne_fish
 capinfos ./.rsrc/demo.pcap
-suricata -r ./.rsrc/demo.pcap -k none --runmode single   -l ./demo_logs/ -vvv   -S /var/lib/suricata/rules/suricata.rules
+```
+
+```
 cp ./demo_logs/eve.json ./.rsrc/
 cd .rsrc
 python3 ./seqdiag.py | java -Djava.awt.headless=true -jar ./plantuml-mit-1.2024.6.jar -p -Tpng > ../seqdiag.png

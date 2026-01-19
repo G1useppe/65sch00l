@@ -38,6 +38,8 @@ Observe how timestamps differ from static inspection.
 Repeat the exercise using `fightson.pcap` while monitoring in Wireshark.
 
 ```bash - st0ne_fish
+sudo wireshark -k -i lo
+sudo suricata -i lo -k none -vvv -l ./fight_logs/
 sudo tcpreplay -i lo ./.rsrc/fightson.pcap
 ```
 
