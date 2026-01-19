@@ -5,12 +5,15 @@ Index Suricata EVE JSON logs into Splunk and analyze alert data from a static in
 
 ## Prepare
 ```bash
-# cd ~/65sch00l/net/suricata_arkime/suricata_a6
+cd ~/65sch00l/net/suricata_arkime/suricata_a6
+mkdir demo_logs fight_logs
+cp ../suricata_a5/logs/demo_logs/* ./demo_logs/
 which suricata
 which splunk
 which jq
-
-# git clone https://github.com/65sch00l/network-tradecraft.git ~/65sch00l
+cd /opt/splunk/bin/
+sudo ./splunk add oneshot ~/65sch00l/net/suricata_arkime/suricata_a6/demo_logs/eve.json -index suricata -sourcetype _json
+firefox http://127.0.0.1:8000
 ```
 
 Dataset:
