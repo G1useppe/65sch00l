@@ -31,3 +31,24 @@ Drive dashboards and reports where fields act as dimensions and measures.
 - Use fields with transforming commands to derive metrics: `| stats count by status`
 - Use wildcard or boolean operators for conditional logic: `status!=200 AND method=POST`
 - Use the `fields` command to include/exclude fields for clarity and performance: `| fields host user status`
+
+
+
+## Logical Operators in Splunk
+Logical operators in Splunk define how multiple search conditions are evaluated. Each event is checked against these operators to determine whether it should be returned.  
+
+- **AND**: All conditions must be true.  
+- **OR**: At least one condition must be true.  
+- **NOT**: Excludes events that match a specific condition.  
+
+By combining these operators, you can create precise and flexible filtering logic.
+
+
+Dashboards in Splunk provide a powerful way to visualize, monitor, and share data. They transform raw search results into actionable insights using **interactive panels** such as:
+
+- **Charts** – line, bar, pie, and more to show trends and comparisons  
+- **Tables** – organized data for detailed analysis  
+- **Maps** – geographic visualization of event data  
+
+Dashboards can be **interactive**, allowing users to filter, drill down, and explore data in real time. By combining multiple panels and searches, they help spot patterns, trends, and anomalies quickly and effectively.
+
