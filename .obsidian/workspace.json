@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "net/suricata_arkime/suricata_a7/suricata_a7.md",
+                "file": "net/suricata_arkime/suricata_a6/suricata_a6.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "suricata_a7"
+              "title": "suricata_a6"
             }
           }
         ]
@@ -172,6 +172,15 @@
   },
   "active": "27557e747735fa75",
   "lastOpenFiles": [
+    "net/suricata_arkime/suricata_a5/suricata_a5.md",
+    "net/suricata_arkime/suricata_a4/suricata_a4.md",
+    "net/suricata_arkime/suricata_a3/suricata_a3.md",
+    "net/suricata_arkime/suricata_a2/suricata_a2.md",
+    "net/suricata_arkime/suricata_a1/suricata_a1.md",
+    "net/suricata_arkime/suricata_a7/suricata_a7.md",
+    "net/suricata_arkime/suricata_a6/New folder",
+    "net/suricata_arkime/suricata_a5/New folder",
+    "net/suricata_arkime/suricata_a4/New folder",
     "host/powershell/~$Commandlet.pptx",
     "host/powershell/Commandlet.pptx",
     "host/Splunk/~$Training Cell - Conversion course - Splunk.pptx",
@@ -180,10 +189,6 @@
     "host/Splunk",
     "net/suricata_arkime/suricata_arkime_intro.md",
     "net/suricata_arkime/suricata_a6/suricata_a6.md",
-    "net/suricata_arkime/suricata_a3/suricata_a3.md",
-    "net/suricata_arkime/suricata_a2/suricata_a2.md",
-    "net/suricata_arkime/suricata_a5/suricata_a5.md",
-    "net/suricata_arkime/suricata_a4/suricata_a4.md",
     "host/powershell/activity2/Commandlet.pptx",
     "host/velociraptor/activity1/Velociraptor Lab Solution.docx",
     "host/powershell/activity3/Remoting.md",
@@ -192,10 +197,6 @@
     "65school/host/velociraptor/velociraptor_intro.md",
     "65school/host/powershell/powershell_intro.md",
     "65school/net/suricata_arkime/suricata_arkime_intro.md",
-    "65school/host/yara",
-    "65school/host/hayabusa",
-    "65school/host/velociraptor",
-    "65school/host/powershell",
     "65school/NAPX.md",
     "Welcome.md",
     "65school/st0ne_fish_v0.png",

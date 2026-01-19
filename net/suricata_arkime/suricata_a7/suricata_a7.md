@@ -19,19 +19,21 @@ Use `./.rsrc/fights_on.pcap`.
 Demonstrate the complete live detection pipeline from packet replay to indexed alerts in Splunk.
 
 ## Execute — Fights On
+Narrative: We've noticed an uptick on malicious scans and probes inbound on our server (203.161.44.28). How many can you count in the window?
+
 1. Start Suricata in live capture mode on loopback:
    ```bash
    sudo suricata -i lo -l ./fight_logs/
    ```
-2. Replay traffic:
+2. Replay traffic (4 hour run):
    ```bash
-   sudo tcpreplay -i lo ./.rsrc/fights_on.pcap
+   sudo tcpreplay -i lo --pps=25 ./.rsrc/fights_on.pcap
    ```
 3. Verify alerts populate in Splunk in real time.
 ``` bash
 sudo /opt/splunk/bin/splunk add monitor ./fight_logs/eve.json -index suricata -sourcetype _json
 ```
-4. Map live detections to MITRE ATT&CK mapper.
+4. Map live detections to MITRE ATT&CK Navigator.
 ``` bash
 firefox https://mitre-attack.github.io/attack-navigator/
 ```
@@ -41,4 +43,4 @@ firefox https://mitre-attack.github.io/attack-navigator/
 - Observing end-to-end detection and indexing
 - Confirming detection timeliness and fidelity
 
-Dataset: 
+Dataset: 2025-11-23

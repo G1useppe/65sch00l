@@ -27,6 +27,8 @@ Demonstrate Arkime’s ability to index, visualize, and tag PCAP data.
 Show navigation through Sessions, SPI View, and Packet Details. Discuss tagging and collaboration.
 
 ## Execute — Fights On
+Narrative: Our AD is under attack! We need to start looking through the network data so we can start deployment of countermeasures and protect our servers going forward. 
+
 1. Ingest the sample PCAP:
    ```bash
    arkime-capture -r ./.rsrc/suspicious-dns.pcap -c /opt/arkime/etc/config.ini

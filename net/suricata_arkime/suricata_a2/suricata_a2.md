@@ -110,6 +110,7 @@ Run Suricata against the second dataset:
 mkdir fight_logs
 
 suricata -r .rsrc/fights_on.pcap   -k none   --runmode single   -l ./fight_logs/   -vvv   -S /var/lib/suricata/rules/suricata.rules
+sudo wireshark ./.rsrc/fights_on.pcap
 ```
 
 ### Analyst Tasks
@@ -128,3 +129,5 @@ Students should now understand:
 - Operating Suricata in **read mode**
 - Cross-referencing alerts with packet data
 - Validating detection coverage
+
+Dataset: 2024-09-04
