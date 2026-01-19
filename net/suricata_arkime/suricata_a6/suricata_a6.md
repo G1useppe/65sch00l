@@ -6,7 +6,7 @@ Index Suricata EVE JSON logs into Splunk and analyze alert data from a static in
 ## Prepare
 ```bash
 cd ~/65sch00l/net/suricata_arkime/suricata_a6
-mkdir demo_logs fight_logs
+mkdir demo_logs
 cp ../suricata_a5/logs/demo_logs/* ./demo_logs/
 which suricata
 which splunk
@@ -17,7 +17,7 @@ firefox http://127.0.0.1:8000
 ```
 
 Dataset:
-Use Suricata output logs from previous exercises in `./logs/eve.json`.
+Use Suricata output logs from previous exercises in `./demo_logs/eve.json`.
 
 ## Brief
 Show how to parse and visualize Suricata events using Splunk’s search and dashboard capabilities.
