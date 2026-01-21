@@ -116,7 +116,6 @@ chmod +x "$RSRC_DIR/zeek_oneshot.sh"
 echo "[+] Running capinfos"
 
 capinfos -A "$PCAP_NAME" > capinfos.txt
-cat capinfos.txt
 
 ############################################
 # SURICATA OFFLINE MODE
@@ -129,7 +128,6 @@ suricata \
     -k none \
     --runmode auto \
     -l "$SURICATA_LOG_DIR" \
-    -vvv \
     -S "$SURICATA_RULES"
 
 ############################################
