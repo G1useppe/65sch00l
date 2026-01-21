@@ -127,7 +127,7 @@ echo "[+] Running Suricata in offline mode"
 suricata \
     -r "$PCAP_NAME" \
     -k none \
-    --runmode single \
+    --runmode auto \
     -l "$SURICATA_LOG_DIR" \
     -vvv \
     -S "$SURICATA_RULES"
