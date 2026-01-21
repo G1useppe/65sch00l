@@ -172,6 +172,8 @@
   },
   "active": "242627b5137533d4",
   "lastOpenFiles": [
+    "NAPX/stepthrough_napx.md",
+    "NAPX/dynamic_oneclick.sh",
     "host/Splunk/Splunk Lab Demo.docx",
     "NAPX/static_oneclick.sh",
     "net/suricata_arkime/suricata_a6/suricata_a6.md",
@@ -189,9 +191,7 @@
     "host/Splunk/~$Training Cell - Conversion course - Splunk.pptx",
     "host/Splunk/Training Cell - Conversion course - Splunk.pptx",
     "host/Splunk/Splunk_Intro_DCI.md",
-    "host/Splunk",
     "net/suricata_arkime/suricata_arkime_intro.md",
-    "host/powershell/activity2/Commandlet.pptx",
     "host/powershell/activity3/Remoting.md",
     "65school/host/yara/yara_intro.md",
     "65school/host/hayabusa/hayabusa_intro.md",
