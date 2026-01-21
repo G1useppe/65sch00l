@@ -1,29 +1,21 @@
 # Lesson 1 — Arkime Fundamentals (Static PCAP Exploration)
 
 ## Summary
-Introduces Arkime for static PCAP indexing and session analysis.
+Introduces Arkime for static PCAP indexing and session analysis. Arkime is a lot better at handling large datasets than
 
 ## Prepare
 ```bash
-cd ~/65sch00l/net/suricata_arkime/suricata_a1
-which arkimeviewer
-which arkimecapture
-which elasticsearch
-which curl
-which jq
-
-# git clone https://github.com/65sch00l/network-tradecraft.git ~/65sch00l
+firefox 
 ```
 
 Dataset:
-Use the provided `./.rsrc/sample-http.pcap` and `./.rsrc/suspicious-dns.pcap` files.
+Use the tagged data on the Arkime Demo Server that can be found using the query:
+```
 
-Ensure Arkime services are running and accessible:
-- Capture service: `systemctl status arkimecapture`
-- Viewer web UI: `http://localhost:8005`
+```
 
 ## Brief
-Demonstrate Arkime’s ability to index, visualize, and tag PCAP data. 
+Demonstrate Arkime’s ability to index, visualize, and tag large PCAP data. 
 Show navigation through Sessions, SPI View, and Packet Details. Discuss tagging and collaboration.
 
 ## Execute — Fights On

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "net/suricata_arkime/suricata_a6/suricata_a6.md",
+                "file": "net/suricata_arkime/suricata_a1/suricata_a1.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "suricata_a6"
+              "title": "suricata_a1"
             }
           }
         ]
@@ -78,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 214.5
   },
   "right": {
     "id": "83dd9d4e5c04f2d8",
@@ -172,6 +172,7 @@
   },
   "active": "27557e747735fa75",
   "lastOpenFiles": [
+    "net/suricata_arkime/suricata_a6/suricata_a6.md",
     "net/suricata_arkime/suricata_a5/suricata_a5.md",
     "net/suricata_arkime/suricata_a4/suricata_a4.md",
     "net/suricata_arkime/suricata_a3/suricata_a3.md",
@@ -188,7 +189,6 @@
     "host/Splunk/Splunk_Intro_DCI.md",
     "host/Splunk",
     "net/suricata_arkime/suricata_arkime_intro.md",
-    "net/suricata_arkime/suricata_a6/suricata_a6.md",
     "host/powershell/activity2/Commandlet.pptx",
     "host/velociraptor/activity1/Velociraptor Lab Solution.docx",
     "host/powershell/activity3/Remoting.md",
