@@ -44,16 +44,35 @@ mkdir -p "$ZEEK_LOG_DIR"
 cd "$DEMO_DIR"
 
 ############################################
-# PCAP SETUP
+# PCAP SETUP (INTERACTIVE)
 ############################################
 
-if [[ ! -f "$PCAP_NAME" ]]; then
-    echo "[+] Attempting to copy PCAP from ~/Documents/.rsrc"
-    cp "$HOME/Documents/.rsrc/"*.pcap "$PCAP_NAME" || {
-        echo "[!] PCAP not found. Please unzip and name it demo.pcap"
-        exit 1
-    }
+echo
+echo "[+] PCAP setup"
+echo "Enter the full path to the PCAP file"
+echo "Press Enter to use the default location:"
+echo "  $HOME/Documents/.rsrc/"
+echo
+
+read -rp "PCAP path: " PCAP_INPUT
+
+# Default fallback
+if [[ -z "$PCAP_INPUT" ]]; then
+    echo "[*] No input provided, attempting default location"
+    PCAP_INPUT=$(ls "$HOME/Documents/.rsrc/"*.pcap 2>/dev/null | head -n 1 || true)
 fi
+
+# Validation
+if [[ ! -f "$PCAP_INPUT" ]]; then
+    echo "[!] PCAP file not found."
+    echo "    Provided path: $PCAP_INPUT"
+    exit 1
+fi
+
+echo "[+] Using PCAP: $PCAP_INPUT"
+
+# Standardise name inside lab
+cp "$PCAP_INPUT" "$DEMO_DIR/$PCAP_NAME"
 
 ############################################
 # SPLUNK INDEX SETUP
