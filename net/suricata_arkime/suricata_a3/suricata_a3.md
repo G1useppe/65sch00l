@@ -54,8 +54,8 @@ suricata -r ./.rsrc/fightson.pcap -k none --runmode single   -l ./fight_logs/ -v
 capinfos ./.rsrc/fightson.pcap
 cp ./fight_logs/eve.json ./.rsrc/
 cd .rsrc
-python3 ./seqdiag.py | java -Djava.awt.headless=true -jar ./plantuml-mit-1.2024.6.jar -p -Tpng > ../seqdiag.png
-eog ../seqdiag.png
+python3 ./seqdiag.py | java -Djava.awt.headless=true -jar ./plantuml-mit-1.2024.6.jar -p -Tpng > ../fightson_seqdiag.png
+eog ../fightson_seqdiag.png
 ```
 
 Review the flow in Wireshark and identify notable sequences or anomalies.  
