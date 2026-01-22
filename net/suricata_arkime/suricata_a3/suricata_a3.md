@@ -50,6 +50,10 @@ Repeat using `fightson.pcap`.
 ```bash - st0ne_fish
 suricata -r ./.rsrc/fightson.pcap -k none --runmode single   -l ./fight_logs/ -vvv   -S /var/lib/suricata/rules/suricata.rules
 capinfos ./.rsrc/fightson.pcap
+cp ./fight_logs/eve.json ./.rsrc/
+cd .rsrc
+python3 ./seqdiag.py | java -Djava.awt.headless=true -jar ./plantuml-mit-1.2024.6.jar -p -Tpng > ../seqdiag.png
+eog seqdiag.png
 ```
 
 Review the flow in Wireshark and identify notable sequences or anomalies.  
