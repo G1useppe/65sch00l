@@ -12,6 +12,7 @@ which tcpreplay
 
 sudo /opt/splunk/bin/splunk remove index suricata
 sudo /opt/splunk/bin/splunk add index suricata
+sudo /opt/splunk/bin/splunk remove monitor ./fight_logs/eve.json
 
 cd ~/65sch00l/net/suricata_arkime/suricata_a7
 ```
