@@ -107,8 +107,6 @@ wireshark ./.rsrc/demo.pcap
 Run Suricata against the second dataset:
 
 ```bash
-mkdir fight_logs
-
 suricata -r .rsrc/fights_on.pcap   -k none   --runmode single   -l ./fight_logs/   -vvv   -S /var/lib/suricata/rules/suricata.rules
 sudo wireshark ./.rsrc/fights_on.pcap
 ```
