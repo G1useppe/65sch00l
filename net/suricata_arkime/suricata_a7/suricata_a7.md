@@ -8,7 +8,6 @@ This is the big one. Demonstrate your skills in a challenging environment. Good 
 cd ~/65sch00l/net/suricata_arkime/suricata_a7
 mkdir fight_logs
 which suricata
-which splunk
 which tcpreplay
 ```
 
@@ -23,7 +22,7 @@ Narrative: We've noticed an uptick on malicious scans and probes inbound on our 
 
 1. Start Suricata in live capture mode on loopback:
    ```bash
-   sudo suricata --pcap=lo --runmode auto -k none --set pcap.checksum-checks=no -v -l ./demo_logs -S /var/lib/suricata/rules/suricata.rules
+   sudo suricata --pcap=lo --runmode auto -k none --set pcap.checksum-checks=no -v -l ./fight_logs -S /var/lib/suricata/rules/suricata.rules
 
 1a. Start Wireshark in live capture mode on loopback:
    ```bash
