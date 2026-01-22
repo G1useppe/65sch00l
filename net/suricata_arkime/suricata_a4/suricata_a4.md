@@ -23,6 +23,7 @@ Use the provided `./.rsrc/demo.pcap` and `./.rsrc/fightson.pcap` files.
 
 Demonstrate how to safely replay traffic on a loopback interface for observation.  
 Wireshark can be used to validate timing, payloads, and reconstruction of sessions.
+The below commands will require their own individual terminal window.
 
 ```bash - st0ne_fish
 sudo wireshark -k -i lo
