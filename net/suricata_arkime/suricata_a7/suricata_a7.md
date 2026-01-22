@@ -7,13 +7,11 @@ This is the big one. Demonstrate your skills in a challenging environment. Good 
 ```bash
 cd ~/65sch00l/net/suricata_arkime/suricata_a7
 mkdir fight_logs
-touch ./fight_logs/eve.json
 which suricata
 which tcpreplay
 
 sudo /opt/splunk/bin/splunk remove index suricata
 sudo /opt/splunk/bin/splunk add index suricata
-sudo /opt/splunk/bin/splunk add monitor ./fight_logs/eve.json -index suricata -sourcetype _json
 
 cd ~/65sch00l/net/suricata_arkime/suricata_a7
 ```
@@ -30,7 +28,11 @@ Narrative: We've noticed an uptick on malicious scans and probes inbound on our 
 1. Start Suricata in live capture mode on loopback:
    ```bash
    sudo suricata --pcap=lo --runmode auto -k none --set pcap.checksum-checks=no -v -l ./fight_logs -S /var/lib/suricata/rules/suricata.rules
-
+   ```
+1a.
+   ```bash
+   sudo /opt/splunk/bin/splunk add monitor ./fight_logs/eve.json -index suricata -sourcetype _json
+   ```
 2. Start Wireshark in live capture mode on loopback:
    ```bash
    sudo wireshark -k -i lo
