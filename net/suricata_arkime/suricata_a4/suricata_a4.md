@@ -24,9 +24,9 @@ Demonstrate how to safely replay traffic on a loopback interface for observation
 Wireshark can be used to validate timing, payloads, and reconstruction of sessions.
 
 ```bash - st0ne_fish
-sudo tcpreplay -i lo -K -pps 100 demo.pcap
 sudo wireshark -k -i lo
 sudo suricata -i lo -k none -vvv -l ./demo_logs/
+sudo tcpreplay -i lo -K -pps 100 demo.pcap
 tail -f ./demo_logs/fast.log
 ```
 
