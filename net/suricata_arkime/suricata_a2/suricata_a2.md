@@ -54,7 +54,7 @@ In this lesson you will:
 Run Suricata in offline mode against the demo PCAP:
 
 ```bash
-suricata -r .rsrc/demo.pcap   -k none   --runmode single   -l ./demo_logs/   -vvv   -S /var/lib/suricata/rules/suricata.rules
+suricata -r .rsrc/demo.pcap   -k none   --runmode auto   -l ./demo_logs/   -vvv   -S /var/lib/suricata/rules/suricata.rules
 ```
 
 ### Command Flags Explained
