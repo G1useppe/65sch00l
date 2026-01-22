@@ -34,7 +34,7 @@ which jq
 Use the provided PCAP file:
 
 ```
-./.rsrc/demo.pcap
+#./.rsrc/demo.pcap
 ```
 
 ---
