@@ -25,7 +25,7 @@ Wireshark can be used to validate timing, payloads, and reconstruction of sessio
 
 ```bash - st0ne_fish
 sudo wireshark -k -i lo
-sudo suricata -i lo -k none -vvv -l ./demo_logs/
+sudo suricata -i lo -k none -vvv -l ./demo_logs/ -S /var/lib/suricata/rules/suricata.rules
 sudo tcpreplay -i lo -K -pps 100 demo.pcap
 tail -f ./demo_logs/fast.log
 ```
