@@ -8,8 +8,13 @@ This is the big one. Demonstrate your skills in a challenging environment. Good 
 cd ~/65sch00l/net/suricata_arkime/suricata_a7
 mkdir fight_logs
 which suricata
-which splunk
 which tcpreplay
+
+sudo /opt/splunk/bin/splunk remove index suricata
+sudo /opt/splunk/bin/splunk add index suricata
+sudo /opt/splunk/bin/splunk remove monitor ./fight_logs/eve.json
+
+cd ~/65sch00l/net/suricata_arkime/suricata_a7
 ```
 
 Dataset:
@@ -23,16 +28,24 @@ Narrative: We've noticed an uptick on malicious scans and probes inbound on our 
 
 1. Start Suricata in live capture mode on loopback:
    ```bash
-   sudo suricata -i lo -l ./fight_logs/
+   sudo suricata --pcap=lo --runmode auto -k none --set pcap.checksum-checks=no -v -l ./fight_logs -S /var/lib/suricata/rules/suricata.rules
    ```
-2. Replay traffic (4 hour run):
+1a.
+   ```bash
+   sudo /opt/splunk/bin/splunk add monitor ./fight_logs/eve.json -index suricata -sourcetype _json
+   ```
+2. Start Wireshark in live capture mode on loopback:
+   ```bash
+   sudo wireshark -k -i lo
+
+   ```
+
+3. Replay traffic (4 hour run):
    ```bash
    sudo tcpreplay -i lo --pps=25 ./.rsrc/fights_on.pcap
    ```
-3. Verify alerts populate in Splunk in real time.
-``` bash
-sudo /opt/splunk/bin/splunk add monitor ./fight_logs/eve.json -index suricata -sourcetype _json
-```
+
+
 4. Map live detections to MITRE ATT&CK Navigator.
 ``` bash
 firefox https://mitre-attack.github.io/attack-navigator/

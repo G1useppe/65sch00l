@@ -12,6 +12,8 @@ which suricata
 which splunk
 which jq
 cd /opt/splunk/bin/
+sudo ./splunk remove index suricata
+sudo ./splunk add index suricata
 sudo ./splunk add oneshot ~/65sch00l/net/suricata_arkime/suricata_a6/demo_logs/eve.json -index suricata -sourcetype _json
 firefox http://127.0.0.1:8000
 ```

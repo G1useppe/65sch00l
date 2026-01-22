@@ -17,7 +17,7 @@ Prepare the working directory and dataset:
 
 ```bash
 cd ~/65sch00l/net/suricata_arkime/suricata_a2
-cp ~/.rsrc/demo.pcap ./.rsrc/
+cp ../.rsrc/demo.pcap ./.rsrc/
 mkdir demo_logs
 mkdir fight_logs
 ```
@@ -34,7 +34,7 @@ which jq
 Use the provided PCAP file:
 
 ```
-./.rsrc/demo.pcap
+#./.rsrc/demo.pcap
 ```
 
 ---
@@ -44,7 +44,7 @@ Use the provided PCAP file:
 In this lesson you will:
 
 - Run Suricata in **read mode** against an existing PCAP
-- Inspect **EVE JSON** output
+- Inspect **eve.json** and **fast.log** output
 - Correlate Suricata alerts with packet-level data in Wireshark
 
 ---
@@ -54,7 +54,7 @@ In this lesson you will:
 Run Suricata in offline mode against the demo PCAP:
 
 ```bash
-suricata -r .rsrc/demo.pcap   -k none   --runmode single   -l ./demo_logs/   -vvv   -S /var/lib/suricata/rules/suricata.rules
+suricata -r .rsrc/demo.pcap   -k none   --runmode auto   -l ./demo_logs/   -vvv   -S /var/lib/suricata/rules/suricata.rules
 ```
 
 ### Command Flags Explained
@@ -107,8 +107,6 @@ wireshark ./.rsrc/demo.pcap
 Run Suricata against the second dataset:
 
 ```bash
-mkdir fight_logs
-
 suricata -r .rsrc/fights_on.pcap   -k none   --runmode single   -l ./fight_logs/   -vvv   -S /var/lib/suricata/rules/suricata.rules
 sudo wireshark ./.rsrc/fights_on.pcap
 ```

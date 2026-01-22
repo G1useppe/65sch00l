@@ -1,7 +1,7 @@
 # Lesson 3 — Capinfos and Sequence Diagramming
 
 ## Summary
-Use capinfos and Wireshark to summarize network flow, visualize packet exchanges, and overlay Suricata alerts.
+Use capinfos, sequence diagramming and Wireshark to summarize network flow, visualize packet exchanges, and overlay Suricata alerts.
 
 ## Prepare
 
@@ -16,6 +16,7 @@ which wireshark
 which capinfos
 which jq
 cp ../suricata_a2/demo_logs/* ./demo_logs/
+cp ../suricata_a2/.rsrc/demo.pcap ./.rsrc
 ```
 
 Dataset:  
@@ -35,8 +36,9 @@ cp ./demo_logs/eve.json ./.rsrc/
 cd .rsrc
 python3 ./seqdiag.py | java -Djava.awt.headless=true -jar ./plantuml-mit-1.2024.6.jar -p -Tpng > ../seqdiag.png
 rm eve.json
-eog seqdiag.png
+eog ../seqdiag.png
 cd ..
+echo "Close Sequence Diagram for Wireshark!"
 wireshark ./.rsrc/demo.pcap
 ```
 
@@ -48,8 +50,13 @@ Represent the exchange as a sequence diagram (tool-based or manual).
 Repeat using `fightson.pcap`.
 
 ```bash - st0ne_fish
-suricata -r ./.rsrc/fightson.pcap -k none --runmode single   -l ./fight_logs/ -vvv   -S /var/lib/suricata/rules/suricata.rules
-capinfos ./.rsrc/fightson.pcap
+cd ~/65sch00l/net/suricata_arkime/suricata_a3
+suricata -r ./.rsrc/fights_on.pcap -k none --runmode single   -l ./fight_logs/ -vvv   -S /var/lib/suricata/rules/suricata.rules
+capinfos ./.rsrc/fights_on.pcap
+cp ./fight_logs/eve.json ./.rsrc/
+cd .rsrc
+python3 ./seqdiag.py | java -Djava.awt.headless=true -jar ./plantuml-mit-1.2024.6.jar -p -Tpng > ../fightson_seqdiag.png
+eog ../fightson_seqdiag.png
 ```
 
 Review the flow in Wireshark and identify notable sequences or anomalies.  
@@ -61,4 +68,4 @@ Overlay Suricata alert data on the diagram and map to MITRE ATT&CK behaviors.
 - Translating packet capture into flow diagrams  
 - Integrating IDS detections into sequence analysis
 
-Dataset: 2021-12-08
+Dataset: 2021-12-08 CHANGE DATASET
