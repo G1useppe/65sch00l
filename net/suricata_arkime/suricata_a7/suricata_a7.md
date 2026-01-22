@@ -7,6 +7,7 @@ This is the big one. Demonstrate your skills in a challenging environment. Good 
 ```bash
 cd ~/65sch00l/net/suricata_arkime/suricata_a7
 mkdir fight_logs
+touch ./fight_logs/eve.json
 which suricata
 which tcpreplay
 
