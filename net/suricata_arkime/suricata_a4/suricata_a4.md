@@ -9,6 +9,7 @@ Set up your workspace and verify required tools.
 
 ```bash - st0ne_fish
 cd ~/65sch00l/net/suricata_arkime/suricata_a4
+cp ../suricata_a2/.rsrc/demo.pcap ./.rsrc
 mkdir demo_logs
 mkdir fight_logs
 which tcpreplay
