@@ -23,7 +23,8 @@ Narrative: We've noticed an uptick on malicious scans and probes inbound on our 
 
 1. Start Suricata in live capture mode on loopback:
    ```bash
-   sudo suricata -i lo -l ./fight_logs/
+  sudo suricata --pcap=lo --runmode single -k none --set pcap.checksum-checks=no -v -l ./demo_logs -S /var/lib/suricata/rules/suricata.rules
+
    ```
 2. Replay traffic (4 hour run):
    ```bash
