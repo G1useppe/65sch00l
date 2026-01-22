@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "net/suricata_arkime/arkime_a1/arkime_a1.md",
+                "file": "net/suricata_arkime/suricata_a2/suricata_a2.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "arkime_a1"
+              "title": "suricata_a2"
             }
           }
         ]
@@ -172,6 +172,7 @@
   },
   "active": "27557e747735fa75",
   "lastOpenFiles": [
+    "net/suricata_arkime/arkime_a1/arkime_a1.md",
     "net/zeek/zeek_intro.md",
     "net/zeek/zeek_a2/zeek_activity2.md",
     "net/zeek/zeek_a1/zeek_activity1.md",
@@ -183,7 +184,6 @@
     "net/suricata_arkime/suricata_a4/suricata_a4.md",
     "net/suricata_arkime/suricata_a3/suricata_a3.md",
     "net/suricata_arkime/suricata_a2/suricata_a2.md",
-    "net/suricata_arkime/arkime_a1/arkime_a1.md",
     "net/suricata_arkime/suricata_a1/suricata_a1.md",
     "net/suricata_arkime/arkime_a1/suricata_a1.md",
     "net/suricata_arkime/arkime_a1",
