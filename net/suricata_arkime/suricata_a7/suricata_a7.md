@@ -29,14 +29,18 @@ Narrative: We've noticed an uptick on malicious scans and probes inbound on our 
    sudo wireshark -k -i lo
 
    ```
-2. Replay traffic (4 hour run):
-   ```bash
-   sudo tcpreplay -i lo --pps=25 ./.rsrc/fights_on.pcap
-   ```
+
 3. Verify alerts populate in Splunk in real time.
 ``` bash
 sudo /opt/splunk/bin/splunk add monitor ./fight_logs/eve.json -index suricata -sourcetype _json
 ```
+
+2. Replay traffic (4 hour run):
+   ```bash
+   sudo tcpreplay -i lo --pps=25 ./.rsrc/fights_on.pcap
+   ```
+
+
 4. Map live detections to MITRE ATT&CK Navigator.
 ``` bash
 firefox https://mitre-attack.github.io/attack-navigator/
