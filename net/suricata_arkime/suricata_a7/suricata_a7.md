@@ -13,6 +13,7 @@ cd /opt/splunk/bin/
 sudo ./splunk remove index suricata
 sudo ./splunk add index suricata
 cd ~/65sch00l/net/suricata_arkime/suricata_a6
+sudo ./splunk add monitor ./fight_logs/eve.json -index suricata -sourcetype _json
 ```
 
 Dataset:
@@ -28,18 +29,13 @@ Narrative: We've noticed an uptick on malicious scans and probes inbound on our 
    ```bash
    sudo suricata --pcap=lo --runmode auto -k none --set pcap.checksum-checks=no -v -l ./fight_logs -S /var/lib/suricata/rules/suricata.rules
 
-1a. Start Wireshark in live capture mode on loopback:
+2. Start Wireshark in live capture mode on loopback:
    ```bash
    sudo wireshark -k -i lo
 
    ```
 
-3. Verify alerts populate in Splunk in real time.
-``` bash
-sudo /opt/splunk/bin/splunk add monitor ./fight_logs/eve.json -index suricata -sourcetype _json
-```
-
-2. Replay traffic (4 hour run):
+3. Replay traffic (4 hour run):
    ```bash
    sudo tcpreplay -i lo --pps=25 ./.rsrc/fights_on.pcap
    ```
