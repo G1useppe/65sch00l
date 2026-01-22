@@ -16,6 +16,7 @@ which wireshark
 which capinfos
 which jq
 cp ../suricata_a2/demo_logs/* ./demo_logs/
+cp ../suricata_a2/.rsrc/demo.pcap ./.rsrc
 ```
 
 Dataset:  
