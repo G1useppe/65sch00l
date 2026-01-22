@@ -28,6 +28,7 @@ The below commands will require their own individual terminal window.
 ```bash - st0ne_fish
 sudo wireshark -k -i lo
 sudo suricata --pcap=lo --runmode single -k none --set pcap.checksum-checks=no -v -l ./demo_logs -S /var/lib/suricata/rules/suricata.rules
+#wait for <Notice> -- all 1 packet processing threads...
 sudo tcpreplay -i lo -K --pps=100 ./.rsrc/demo.pcap
 tail -f ./demo_logs/fast.log
 ```
