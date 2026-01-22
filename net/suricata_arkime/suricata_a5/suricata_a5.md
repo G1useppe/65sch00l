@@ -1,7 +1,7 @@
-# Lesson 5 — Live Capture with Arkime
+# Lesson 5 — Static Workflow with Arkime
 
 ## Summary
-Capture live network traffic in Arkime while replaying PCAPs with Tcpreplay.
+Use Arkime in conjunction with Suricata to rehearse investigation workflows for larger datasets.
 
 ## Prepare
 ```bash

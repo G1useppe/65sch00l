@@ -1,7 +1,7 @@
 # Lesson 3 — Capinfos and Sequence Diagramming
 
 ## Summary
-Use capinfos and Wireshark to summarize network flow, visualize packet exchanges, and overlay Suricata alerts.
+Use capinfos, sequence diagramming and Wireshark to summarize network flow, visualize packet exchanges, and overlay Suricata alerts.
 
 ## Prepare
 

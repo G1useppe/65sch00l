@@ -5,14 +5,12 @@ Introduces Arkime for static PCAP indexing and session analysis. Arkime is a lot
 
 ## Prepare
 ```bash
-firefox 
+firefox https://demo5.arkime.com/auth
+echo "credentials: arkime/arkime"
 ```
 
 Dataset:
-Use the tagged data on the Arkime Demo Server that can be found using the query:
-```
-
-```
+Query all of the data on the Arkime Demo Server - you'll be surprised at what you will find!:
 
 ## Brief
 Demonstrate Arkime’s ability to index, visualize, and tag large PCAP data. 

@@ -44,7 +44,7 @@ Use the provided PCAP file:
 In this lesson you will:
 
 - Run Suricata in **read mode** against an existing PCAP
-- Inspect **EVE JSON** output
+- Inspect **eve.json** and **fast.log** output
 - Correlate Suricata alerts with packet-level data in Wireshark
 
 ---
