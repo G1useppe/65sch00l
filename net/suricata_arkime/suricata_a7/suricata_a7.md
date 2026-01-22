@@ -12,8 +12,9 @@ which tcpreplay
 cd /opt/splunk/bin/
 sudo ./splunk remove index suricata
 sudo ./splunk add index suricata
-cd ~/65sch00l/net/suricata_arkime/suricata_a7
 sudo ./splunk add monitor ~/65sch00l/net/suricata_arkime/suricata_a7/fight_logs/eve.json -index suricata -sourcetype _json
+
+cd ~/65sch00l/net/suricata_arkime/suricata_a7
 ```
 
 Dataset:
