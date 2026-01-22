@@ -10,9 +10,9 @@ mkdir fight_logs
 which suricata
 which tcpreplay
 
-sudo opt/splunk/bin/splunk remove index suricata
-sudo opt/splunk/bin/splunk add index suricata
-sudo opt/splunk/bin/splunk add monitor ./fight_logs/eve.json -index suricata -sourcetype _json
+sudo /opt/splunk/bin/splunk remove index suricata
+sudo /opt/splunk/bin/splunk add index suricata
+sudo /opt/splunk/bin/splunk add monitor ./fight_logs/eve.json -index suricata -sourcetype _json
 
 cd ~/65sch00l/net/suricata_arkime/suricata_a7
 ```
