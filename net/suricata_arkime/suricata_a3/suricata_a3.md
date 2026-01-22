@@ -52,7 +52,7 @@ Repeat using `fightson.pcap`.
 ```bash - st0ne_fish
 cd ~/65sch00l/net/suricata_arkime/suricata_a3
 suricata -r ./.rsrc/fights_on.pcap -k none --runmode single   -l ./fight_logs/ -vvv   -S /var/lib/suricata/rules/suricata.rules
-capinfos ./.rsrc/fightson.pcap
+capinfos ./.rsrc/fights_on.pcap
 cp ./fight_logs/eve.json ./.rsrc/
 cd .rsrc
 python3 ./seqdiag.py | java -Djava.awt.headless=true -jar ./plantuml-mit-1.2024.6.jar -p -Tpng > ../fightson_seqdiag.png
