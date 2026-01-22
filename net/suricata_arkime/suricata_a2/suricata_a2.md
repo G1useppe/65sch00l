@@ -17,7 +17,7 @@ Prepare the working directory and dataset:
 
 ```bash
 cd ~/65sch00l/net/suricata_arkime/suricata_a2
-cp ~/.rsrc/demo.pcap ./.rsrc/
+cp ../.rsrc/demo.pcap ./.rsrc/
 mkdir demo_logs
 mkdir fight_logs
 ```
