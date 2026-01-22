@@ -50,6 +50,7 @@ Represent the exchange as a sequence diagram (tool-based or manual).
 Repeat using `fightson.pcap`.
 
 ```bash - st0ne_fish
+cd ~/65sch00l/net/suricata_arkime/suricata_a3
 suricata -r ./.rsrc/fightson.pcap -k none --runmode single   -l ./fight_logs/ -vvv   -S /var/lib/suricata/rules/suricata.rules
 capinfos ./.rsrc/fightson.pcap
 cp ./fight_logs/eve.json ./.rsrc/
