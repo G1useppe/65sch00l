@@ -9,10 +9,10 @@ cd ~/65sch00l/net/suricata_arkime/suricata_a7
 mkdir fight_logs
 which suricata
 which tcpreplay
-cd /opt/splunk/bin/
-sudo ./splunk remove index suricata
-sudo ./splunk add index suricata
-sudo ./splunk add monitor ~/65sch00l/net/suricata_arkime/suricata_a7/fight_logs/eve.json -index suricata -sourcetype _json
+
+sudo opt/splunk/bin/splunk remove index suricata
+sudo opt/splunk/bin/splunk add index suricata
+sudo opt/splunk/bin/splunk add monitor ./fight_logs/eve.json -index suricata -sourcetype _json
 
 cd ~/65sch00l/net/suricata_arkime/suricata_a7
 ```
