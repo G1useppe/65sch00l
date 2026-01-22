@@ -9,6 +9,10 @@ cd ~/65sch00l/net/suricata_arkime/suricata_a7
 mkdir fight_logs
 which suricata
 which tcpreplay
+cd /opt/splunk/bin/
+sudo ./splunk remove index suricata
+sudo ./splunk add index suricata
+cd ~/65sch00l/net/suricata_arkime/suricata_a6
 ```
 
 Dataset:
