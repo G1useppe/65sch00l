@@ -1,0 +1,91 @@
+key,type,real_name,description
+index_01,index,<your_transfer_index>,Production transfer event index
+sourcetype_01,sourcetype,_json,Sourcetype for JSON-formatted transfer events
+lookup_01,lookup,human_filesize_baseline.csv,H-BL-001: Human file size baseline
+lookup_02,lookup,human_entropy_baseline.csv,H-BL-002: Human entropy baseline
+lookup_03,lookup,human_extension_baseline.csv,H-BL-003: Human extension diversity baseline
+lookup_04,lookup,human_integrity_baseline.csv,H-BL-004: Human transfer integrity baseline
+lookup_05,lookup,machine_filesize_baseline.csv,M-BL-001: Machine file size baseline
+lookup_06,lookup,machine_entropy_baseline.csv,M-BL-002: Machine entropy baseline
+lookup_07,lookup,machine_extension_baseline.csv,M-BL-003: Machine extension diversity baseline
+lookup_08,lookup,machine_integrity_baseline.csv,M-BL-004: Machine transfer integrity baseline
+lookup_09,lookup,human_volume_baseline.csv,H-FE-002: Human temporal volume baseline
+lookup_10,lookup,machine_volume_baseline.csv,M-FE-002: Machine temporal volume baseline
+lookup_11,lookup,human_feature_vector.csv,H-FE-001: Human 13-feature vector
+lookup_12,lookup,machine_feature_vector.csv,M-FE-001: Machine 13-feature vector
+lookup_13,lookup,human_dbscan_scores.csv,H-SC-001: Human DBSCAN scoring output
+lookup_14,lookup,machine_dbscan_scores.csv,M-SC-001: Machine DBSCAN scoring output
+model_01,model,app:human_dbscan_model,MLTK saved model for human DBSCAN
+model_02,model,app:machine_dbscan_model,MLTK saved model for machine DBSCAN
+x01,field,user,Account identifier (human username in firstname.lastname format)
+x02,field,transfer_id,Unique transfer identifier
+x03,field,population,"Population tag: ""human"" or ""machine"""
+x04,field,src_path,Source file path (sole machine entity identifier; 1-to-1 with service account in production)
+x05,field,file_size,File size in bytes
+x06,field,file_entropy,Shannon entropy of file content (0.0 to 8.0)
+x07,field,file_extension,"File extension (e.g. .docx, .csv, .zip)"
+x08,field,SendEventCount,Number of send-side log events for this transfer
+x09,field,ReceiverEventCount,Number of receive-side log events for this transfer
+x10,field,avg_file_size,Mean file size across all transfers for this entity
+x11,field,stdev_file_size,Standard deviation of file size (floored at 1)
+x12,field,median_file_size,Median file size
+x13,field,min_file_size,Minimum observed file size
+x14,field,max_file_size,Maximum observed file size
+x15,field,transfer_count,Total transfer count in the baseline window
+x16,field,avg_entropy,Mean file entropy
+x17,field,stdev_entropy,Standard deviation of entropy (floored at 0.1)
+x18,field,median_entropy,Median entropy
+x19,field,min_entropy,Minimum observed entropy
+x20,field,max_entropy,Maximum observed entropy
+x21,field,distinct_ext_count,Count of distinct file extensions observed
+x22,field,ext_list,Multivalue list of all observed file extensions
+x23,field,avg_ext_per_transfer,Average extensions per transfer (distinct_ext_count / transfer_count)
+x24,field,stdev_ext_per_transfer,Stdev of extensions per transfer (hardcoded 0.5)
+x25,field,most_common_ext,Most common extension (approximate; alphabetical first from values())
+x26,field,avg_integrity_ratio,Mean integrity ratio (SendEventCount / ReceiverEventCount)
+x27,field,stdev_integrity_ratio,Standard deviation of integrity ratio (floored at 0.05)
+x28,field,avg_send_events,Mean send event count
+x29,field,avg_recv_events,Mean receive event count
+x30,field,mismatch_rate,Rate of send/receive mismatches (0.0 to 1.0)
+x31,field,integrity_ratio,Computed integrity ratio (intermediate field in BL-004)
+x32,field,is_mismatch,Binary mismatch indicator (intermediate field in BL-004)
+x33,field,last_rebuilt,Epoch timestamp of last baseline rebuild
+x34,field,hour_bucket,"4-hour time bucket (0, 4, 8, 12, 16, 20)"
+x35,field,day_of_week,Day of week (0=Sunday through 6=Saturday)
+x36,field,time_window,Concrete time window identifier (date + hour_bucket)
+x37,field,transfers_in_window,Count of transfers within a single concrete time window
+x38,field,avg_transfers_per_window,Mean transfers per window for entity+time pattern
+x39,field,stdev_transfers_per_window,Standard deviation of transfers per window (floored at 0.5)
+x40,field,max_transfers_per_window,Maximum transfers observed in any single window
+x41,field,sample_window_count,Number of distinct windows in the baseline sample
+x42,field,integrity_ratio_raw,Raw integrity ratio computed at scoring time (intermediate)
+x43,field,file_size_zscore,Feature F01: (observed_size - avg) / stdev
+x44,field,file_size_ratio,Feature F02: observed_size / avg_file_size
+x45,field,entropy_zscore,Feature F03: (observed_entropy - avg) / stdev
+x46,field,entropy_ratio,Feature F04: observed_entropy / avg_entropy
+x47,field,ext_diversity_zscore,Feature F05: (ext_count - avg) / stdev
+x48,field,ext_novelty_flag,Feature F06: 1 if extension not in baseline ext_list (uses mvfind)
+x49,field,ext_rarity_score,Feature F07: 1 - (1 / distinct_ext_count)
+x50,field,integrity_ratio,Feature F08: SendEventCount / ReceiverEventCount (passthrough)
+x51,field,integrity_zscore,Feature F09: (observed_ratio - avg) / stdev
+x52,field,missing_event_flag,Feature F10: 1 if SendEventCount or ReceiverEventCount is 0/null
+x53,field,volume_zscore,Feature F11: (current_window_count - avg) / stdev
+x54,field,size_entropy_interaction,Feature F12: file_size_zscore * entropy_zscore
+x55,field,composite_deviation_score,Feature F13: sqrt(sum(zscore^2) / 5) across 5 z-score features
+x56,field,bl_avg_file_size,Lookup alias: avg_file_size from baseline join
+x57,field,bl_stdev_file_size,Lookup alias: stdev_file_size from baseline join
+x58,field,bl_avg_entropy,Lookup alias: avg_entropy from baseline join
+x59,field,bl_stdev_entropy,Lookup alias: stdev_entropy from baseline join
+x60,field,bl_ext_list,Lookup alias: ext_list from baseline join
+x61,field,bl_avg_ext_per_transfer,Lookup alias: avg_ext_per_transfer from baseline join
+x62,field,bl_stdev_ext_per_transfer,Lookup alias: stdev_ext_per_transfer from baseline join
+x63,field,bl_distinct_ext_count,Lookup alias: distinct_ext_count from baseline join
+x64,field,bl_avg_integrity_ratio,Lookup alias: avg_integrity_ratio from baseline join
+x65,field,bl_stdev_integrity_ratio,Lookup alias: stdev_integrity_ratio from baseline join
+x66,field,bl_avg_vol,Lookup alias: avg_transfers_per_window from volume baseline join
+x67,field,bl_stdev_vol,Lookup alias: stdev_transfers_per_window from volume baseline join
+x68,field,current_window_count,Current window transfer count from eventstats
+x70,field,cluster_label,DBSCAN cluster assignment (-1 = noise/anomaly)
+x71,field,anomaly_flag,Binary anomaly indicator: 1 if cluster_label == -1
+x72,field,feature_vector_hash,MD5 hash of z-score features for traceability
+x73,field,scoring_timestamp,Epoch timestamp of scoring run
