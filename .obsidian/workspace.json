@@ -20,8 +20,21 @@
               "icon": "lucide-file",
               "title": "suricata_a3"
             }
+          },
+          {
+            "id": "374b41b6a93de356",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.11.7"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.11.7"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -170,7 +183,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "27557e747735fa75",
+  "active": "374b41b6a93de356",
   "lastOpenFiles": [
     "net/suricata_arkime/suricata_a2/suricata_a2.md",
     "net/suricata_arkime/arkime_a1/arkime_a1.md",
