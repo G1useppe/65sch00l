@@ -176,7 +176,7 @@ suricata -r .rsrc/fights_on.pcap \
   -k none \
   --runmode single \
   -l ./fight_logs/ \
-  -vvv \
+  -v \
   -S /var/lib/suricata/rules/suricata.rules
 
 # 3. Generate sequence diagram
