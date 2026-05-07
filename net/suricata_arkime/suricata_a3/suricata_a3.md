@@ -8,12 +8,17 @@ Before diving into packet-level analysis, experienced analysts start with the bi
 
 ## Prepare
 
-### Download the Dataset
+### Copy the Dataset
 
 ```bash
 cd ~/65sch00l/net/suricata_arkime/suricata_a3
 mkdir -p .rsrc demo_logs fight_logs
+cp ../.rsrc/demo.pcap ./.rsrc/
+```
 
+The below portion is not required
+
+```bash
 # Demo PCAP — reuse from Lesson 2 or re-download
 DEMO_PCAP=".rsrc/demo.pcap"
 if [ ! -f "$DEMO_PCAP" ]; then
@@ -168,6 +173,8 @@ Repeat the full workflow with a fresh dataset:
 ```bash
 cd ~/65sch00l/net/suricata_arkime/suricata_a3
 
+mkdir fight_logs
+
 # 1. Summarize the PCAP
 capinfos .rsrc/fights_on.pcap
 
@@ -176,7 +183,7 @@ suricata -r .rsrc/fights_on.pcap \
   -k none \
   --runmode single \
   -l ./fight_logs/ \
-  -vvv \
+  -v \
   -S /var/lib/suricata/rules/suricata.rules
 
 # 3. Generate sequence diagram
