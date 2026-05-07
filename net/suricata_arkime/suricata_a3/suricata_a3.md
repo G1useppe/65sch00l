@@ -72,8 +72,8 @@ The `seqdiag.py` script in `.rsrc/` reads `eve.json` alerts and outputs PlantUML
 
 ```bash
 # Check for PlantUML jar
-if [ ! -f ".rsrc/plantuml.jar" ]; then
-  curl -L -o .rsrc/plantuml.jar \
+if [ ! -f ".rsrc/plantuml-mit-1.2024.6.jar" ]; then
+  curl -L -o .rsrc/plantuml-mit-1.2024.6.jar\
     "https://github.com/plantuml/plantuml/releases/download/v1.2024.6/plantuml-mit-1.2024.6.jar"
 fi
 
@@ -134,7 +134,7 @@ cd .rsrc
 
 # Generate the PlantUML source and render to PNG
 python3 ./seqdiag.py | java -Djava.awt.headless=true \
-  -jar ./plantuml.jar -p -Tpng > ../demo_seqdiag.png
+  -jar ./plantuml-mit-1.2024.6.jar -p -Tpng > ../demo_seqdiag.png
 
 # Clean up
 rm eve.json
