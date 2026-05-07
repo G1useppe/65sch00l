@@ -15,7 +15,9 @@
 #
 # =============================================================================
 
-set -euo pipefail
+set -uo pipefail
+# NOTE: we do NOT use set -e here — we trap errors from unzip manually
+# so we can give clear feedback on password failures.
 
 # ---------------------------------------------------------------------------
 # Configuration
@@ -41,6 +43,9 @@ LESSON1_DEMO="../arkime_a1/.rsrc/demo.pcap"
 DEMO_LOGS="${LESSON_DIR}/demo_logs"
 FIGHT_LOGS="${LESSON_DIR}/fight_logs"
 
+# Track overall success
+ERRORS=0
+
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
@@ -57,6 +62,87 @@ check_command() {
 }
 
 # ---------------------------------------------------------------------------
+# extract_pcap — extracts a zip, renames the PCAP, cleans up.
+#                Handles password failures with a clear error message.
+#
+# Usage: extract_pcap <zip_path> <extract_name> <final_path>
+# ---------------------------------------------------------------------------
+
+extract_pcap() {
+    local zip_path="$1"
+    local extract_name="$2"
+    local final_path="$3"
+
+    info "Extracting with password..."
+
+    # Run unzip and capture its exit code + output separately.
+    # We do NOT let set -e kill us here — we check the result ourselves.
+    local unzip_output
+    local unzip_rc=0
+    unzip_output=$(unzip -o -P "${MTA_PASS}" "${zip_path}" -d "${RSRC_DIR}" 2>&1) || unzip_rc=$?
+
+    if [ "${unzip_rc}" -ne 0 ]; then
+        echo ""
+        error "============================================================"
+        error "unzip FAILED (exit code ${unzip_rc})."
+        error "============================================================"
+        echo ""
+
+        # Check for password-related messages in the output.
+        # Different unzip versions use different wording.
+        if echo "${unzip_output}" | grep -qiE "incorrect password|wrong password|bad password|skipping|invalid"; then
+            error "CAUSE: Incorrect password."
+            error "The MTA_PASS you provided does not unlock this zip file."
+        fi
+
+        echo ""
+        echo "  The password scheme for malware-traffic-analysis.net changes"
+        echo "  periodically. Check the current password at:"
+        echo ""
+        echo "    https://www.malware-traffic-analysis.net/about.html"
+        echo ""
+        echo "  Then re-run with the correct password:"
+        echo ""
+        echo "    export MTA_PASS=\"correct_password\""
+        echo "    ./.rsrc/download_datasets.sh"
+        echo ""
+        echo "  --- unzip output ---"
+        echo "  ${unzip_output}"
+        echo "  --------------------"
+        echo ""
+
+        # Remove the zip so the next run doesn't see a stale file and skip
+        rm -f "${zip_path}"
+
+        ERRORS=$((ERRORS + 1))
+        return 1
+    fi
+
+    # Verify the expected file actually appeared after extraction
+    if [ ! -f "${RSRC_DIR}/${extract_name}" ]; then
+        error "Extraction appeared to succeed but the expected file was not found."
+        error "  Expected: ${extract_name}"
+        error "  Contents of ${RSRC_DIR}/:"
+        ls -la "${RSRC_DIR}/" >&2
+        echo ""
+        error "The zip may contain a differently named file. Check manually:"
+        error "  unzip -l ${zip_path}"
+        rm -f "${zip_path}"
+        ERRORS=$((ERRORS + 1))
+        return 1
+    fi
+
+    mv "${RSRC_DIR}/${extract_name}" "${final_path}"
+    info "Renamed to $(basename "${final_path}")"
+
+    # Clean up the zip
+    rm -f "${zip_path}"
+    info "Removed zip file."
+
+    return 0
+}
+
+# ---------------------------------------------------------------------------
 # Pre-flight checks
 # ---------------------------------------------------------------------------
 
@@ -70,13 +156,15 @@ if [ -z "${MTA_PASS:-}" ]; then
     echo ""
     echo "  The zip files from malware-traffic-analysis.net are password-protected."
     echo "  Check https://www.malware-traffic-analysis.net/about.html for the current"
-    echo "  password, then run:"
+    echo "  password scheme, then run:"
     echo ""
     echo "    export MTA_PASS=\"the_password\""
     echo "    ./.rsrc/download_datasets.sh"
     echo ""
     exit 1
 fi
+
+info "MTA_PASS is set (length: ${#MTA_PASS} chars)."
 
 # ---------------------------------------------------------------------------
 # Create directories
@@ -109,29 +197,17 @@ else
     info "Downloading demo PCAP..."
     info "  URL: ${DEMO_URL}"
 
-    curl --fail --location --progress-bar \
+    if ! curl --fail --location --progress-bar \
         --output "${DEMO_ZIP}" \
-        "${DEMO_URL}"
-
-    if [ ! -f "${DEMO_ZIP}" ]; then
-        die "Download failed — zip file not found at ${DEMO_ZIP}"
+        "${DEMO_URL}"; then
+        error "curl download failed for demo PCAP."
+        error "Check that the URL is still valid:"
+        error "  ${DEMO_URL}"
+        ERRORS=$((ERRORS + 1))
+    else
+        info "Download complete. Size: $(du -h "${DEMO_ZIP}" | cut -f1)"
+        extract_pcap "${DEMO_ZIP}" "${DEMO_EXTRACTED}" "${DEMO_PCAP}"
     fi
-
-    info "Download complete. Size: $(du -h "${DEMO_ZIP}" | cut -f1)"
-    info "Extracting..."
-
-    unzip -o -P "${MTA_PASS}" "${DEMO_ZIP}" -d "${RSRC_DIR}"
-
-    if [ ! -f "${RSRC_DIR}/${DEMO_EXTRACTED}" ]; then
-        die "Extraction failed — expected file not found: ${DEMO_EXTRACTED}"
-    fi
-
-    mv "${RSRC_DIR}/${DEMO_EXTRACTED}" "${DEMO_PCAP}"
-    info "Renamed to ${DEMO_PCAP}"
-
-    # Clean up the zip
-    rm -f "${DEMO_ZIP}"
-    info "Removed zip file."
 fi
 
 # ---------------------------------------------------------------------------
@@ -147,29 +223,17 @@ else
     info "Downloading Fights On PCAP..."
     info "  URL: ${FIGHT_URL}"
 
-    curl --fail --location --progress-bar \
+    if ! curl --fail --location --progress-bar \
         --output "${FIGHT_ZIP}" \
-        "${FIGHT_URL}"
-
-    if [ ! -f "${FIGHT_ZIP}" ]; then
-        die "Download failed — zip file not found at ${FIGHT_ZIP}"
+        "${FIGHT_URL}"; then
+        error "curl download failed for Fights On PCAP."
+        error "Check that the URL is still valid:"
+        error "  ${FIGHT_URL}"
+        ERRORS=$((ERRORS + 1))
+    else
+        info "Download complete. Size: $(du -h "${FIGHT_ZIP}" | cut -f1)"
+        extract_pcap "${FIGHT_ZIP}" "${FIGHT_EXTRACTED}" "${FIGHT_PCAP}"
     fi
-
-    info "Download complete. Size: $(du -h "${FIGHT_ZIP}" | cut -f1)"
-    info "Extracting..."
-
-    unzip -o -P "${MTA_PASS}" "${FIGHT_ZIP}" -d "${RSRC_DIR}"
-
-    if [ ! -f "${RSRC_DIR}/${FIGHT_EXTRACTED}" ]; then
-        die "Extraction failed — expected file not found: ${FIGHT_EXTRACTED}"
-    fi
-
-    mv "${RSRC_DIR}/${FIGHT_EXTRACTED}" "${FIGHT_PCAP}"
-    info "Renamed to ${FIGHT_PCAP}"
-
-    # Clean up the zip
-    rm -f "${FIGHT_ZIP}"
-    info "Removed zip file."
 fi
 
 # ---------------------------------------------------------------------------
@@ -181,15 +245,25 @@ info "=== Dataset Summary ==="
 echo ""
 
 for pcap in "${DEMO_PCAP}" "${FIGHT_PCAP}"; do
+    name=$(basename "${pcap}")
     if [ -f "${pcap}" ]; then
-        name=$(basename "${pcap}")
         size=$(du -h "${pcap}" | cut -f1)
         echo "  ✔  ${name}  (${size})"
     else
-        name=$(basename "${pcap}")
         echo "  ✘  ${name}  MISSING"
     fi
 done
 
 echo ""
-info "Done. You're ready to start Lesson 2."
+
+if [ "${ERRORS}" -gt 0 ]; then
+    error "${ERRORS} error(s) occurred. Review the output above."
+    echo ""
+    echo "  Most common cause: incorrect MTA_PASS."
+    echo "  Check https://www.malware-traffic-analysis.net/about.html"
+    echo "  and re-run with the correct password."
+    echo ""
+    exit 1
+else
+    info "Done. You're ready to start Lesson 2."
+fi
