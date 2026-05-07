@@ -173,6 +173,8 @@ Repeat the full workflow with a fresh dataset:
 ```bash
 cd ~/65sch00l/net/suricata_arkime/suricata_a3
 
+mkdir fight_logs
+
 # 1. Summarize the PCAP
 capinfos .rsrc/fights_on.pcap
 
