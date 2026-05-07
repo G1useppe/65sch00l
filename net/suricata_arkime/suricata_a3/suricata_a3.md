@@ -8,7 +8,7 @@ Before diving into packet-level analysis, experienced analysts start with the bi
 
 ## Prepare
 
-### Download the Dataset
+### Copy the Dataset
 
 ```bash
 cd ~/65sch00l/net/suricata_arkime/suricata_a3
@@ -16,7 +16,9 @@ mkdir -p .rsrc demo_logs fight_logs
 cp ../.rsrc/demo.pcap ./.rsrc/
 ```
 
-```
+This portion is not required
+
+```bash
 # Demo PCAP — reuse from Lesson 2 or re-download
 DEMO_PCAP=".rsrc/demo.pcap"
 if [ ! -f "$DEMO_PCAP" ]; then
