@@ -18,34 +18,21 @@ sudo suricata-update
 
 ### Download the Dataset
 
+Set the malware-traffic-analysis.net zip password (see the [about page](https://www.malware-traffic-analysis.net/about.html) for the current password):
+
+```bash
+export MTA_PASS="infected"
+```
+
+Then run the download script:
+
 ```bash
 cd ~/65sch00l/net/suricata_arkime/suricata_a2
-mkdir -p .rsrc demo_logs fight_logs
-
-# Demo PCAP — reuse the dataset from Lesson 1
-DEMO_PCAP=".rsrc/demo.pcap"
-if [ ! -f "$DEMO_PCAP" ]; then
-  DEMO_ZIP=".rsrc/2024-09-04-traffic-analysis-exercise.pcap.zip"
-  curl -L -o "$DEMO_ZIP" \
-    "https://www.malware-traffic-analysis.net/2024/09/04/2024-09-04-traffic-analysis-exercise.pcap.zip"
-  unzip -P "$MTA_PASS" "$DEMO_ZIP" -d .rsrc/
-  mv .rsrc/2024-09-04-traffic-analysis-exercise.pcap "$DEMO_PCAP"
-else
-  echo "Demo PCAP already exists, skipping download."
-fi
-
-# Fights On PCAP — a different exercise for independent analysis
-FIGHT_PCAP=".rsrc/fights_on.pcap"
-if [ ! -f "$FIGHT_PCAP" ]; then
-  FIGHT_ZIP=".rsrc/2024-07-30-traffic-analysis-exercise.pcap.zip"
-  curl -L -o "$FIGHT_ZIP" \
-    "https://www.malware-traffic-analysis.net/2024/07/30/2024-07-30-traffic-analysis-exercise.pcap.zip"
-  unzip -P "$MTA_PASS" "$FIGHT_ZIP" -d .rsrc/
-  mv .rsrc/2024-07-30-traffic-analysis-exercise.pcap "$FIGHT_PCAP"
-else
-  echo "Fights On PCAP already exists, skipping download."
-fi
+chmod +x .rsrc/download_datasets.sh
+./.rsrc/download_datasets.sh
 ```
+
+The script downloads two PCAPs into `.rsrc/`, creates the `demo_logs/` and `fight_logs/` directories, and skips any files that already exist. See `.rsrc/download_datasets.sh` for full details.
 
 ### Verify Tools
 
