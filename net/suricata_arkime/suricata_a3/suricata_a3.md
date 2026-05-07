@@ -16,7 +16,7 @@ mkdir -p .rsrc demo_logs fight_logs
 cp ../.rsrc/demo.pcap ./.rsrc/
 ```
 
-This portion is not required
+The below portion is not required
 
 ```bash
 # Demo PCAP — reuse from Lesson 2 or re-download
