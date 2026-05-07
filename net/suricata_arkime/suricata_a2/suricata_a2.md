@@ -28,8 +28,12 @@ Then run the download script:
 
 ```bash
 cd ~/65sch00l/net/suricata_arkime/suricata_a2
-chmod +x .rsrc/suricata_a2_download_datasets.sh
-./.rsrc/suricata_a2_download_datasets.sh
+# chmod +x .rsrc/suricata_a2_download_datasets.sh
+# ./.rsrc/suricata_a2_download_datasets.sh
+mkdir fight_logs demo_logs
+cp ./.rsrc/eve.json ./demo_logs
+cp ./.rsrc/fast.log ./demo_logs
+
 ```
 
 The script downloads two PCAPs into `.rsrc/`, creates the `demo_logs/` and `fight_logs/` directories, and skips any files that already exist. See `.rsrc/download_datasets.sh` for full details.
