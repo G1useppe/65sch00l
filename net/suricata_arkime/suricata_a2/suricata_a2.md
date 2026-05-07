@@ -16,7 +16,7 @@ Pull the latest Emerging Threats ruleset before every analysis session:
 sudo suricata-update
 ```
 
-### Download the Dataset
+### Download the Dataset - ALREADY DONE - Check .rsrc
 
 Set the malware-traffic-analysis.net zip password (see the [about page](https://www.malware-traffic-analysis.net/about.html) for the current password):
 
