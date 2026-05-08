@@ -187,7 +187,8 @@ suricata -r .rsrc/fights_on.pcap \
   -S /var/lib/suricata/rules/suricata.rules
 
 # 3. Generate sequence diagram
-rm ./.rsrc/eve.json
+rm ./.rsrc/eve.json 2>/dev/null
+rm ./.rsrc/seqdiag.png 2>/dev/null
 cp ./fight_logs/eve.json .rsrc/
 cd .rsrc
 python3 ./seqdiag.py | java -Djava.awt.headless=true \
