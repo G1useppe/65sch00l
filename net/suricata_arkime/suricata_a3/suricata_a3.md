@@ -175,6 +175,11 @@ cd ~/65sch00l/net/suricata_arkime/suricata_a3
 
 mkdir fight_logs
 
+rm ./fight_logs/*
+
+rm ./.rsrc/eve.json 2>/dev/null
+rm ./.rsrc/seqdiag.png 2>/dev/null
+
 # 1. Summarize the PCAP
 capinfos .rsrc/fights_on.pcap
 
@@ -187,8 +192,7 @@ suricata -r .rsrc/fights_on.pcap \
   -S /var/lib/suricata/rules/suricata.rules
 
 # 3. Generate sequence diagram
-rm ./.rsrc/eve.json 2>/dev/null
-rm ./.rsrc/seqdiag.png 2>/dev/null
+
 cp ./fight_logs/eve.json .rsrc/
 cd .rsrc
 python3 ./seqdiag.py | java -Djava.awt.headless=true \
