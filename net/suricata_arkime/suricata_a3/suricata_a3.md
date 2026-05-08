@@ -187,10 +187,11 @@ suricata -r .rsrc/fights_on.pcap \
   -S /var/lib/suricata/rules/suricata.rules
 
 # 3. Generate sequence diagram
+rm ./.rsrc/eve.json
 cp ./fight_logs/eve.json .rsrc/
 cd .rsrc
 python3 ./seqdiag.py | java -Djava.awt.headless=true \
-  -jar ../plantuml-mit-1.2024.6.jar -p -Tpng > ../fights_on_seqdiag.png
+  -jar ./plantuml-mit-1.2024.6.jar -p -Tpng > ../fights_on_seqdiag.png
 rm eve.json
 cd ..
 xdg-open ./fights_on_seqdiag.png 2>/dev/null || echo "Open fights_on_seqdiag.png manually"
